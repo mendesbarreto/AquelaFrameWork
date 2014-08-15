@@ -8,13 +8,13 @@ namespace AFFrameWork.Core
 {
     public class AqueleFrameWork : Editor
     {
-        [MenuItem ("MDSFrameWork/SmartFoxServer")]
+        [MenuItem("AqueleFrameWork/SmartFoxServer")]
         static void ConfigSmartFoxServer()
         {
             AFSmartFoxServerWindow.Init();
         }
 
-        [MenuItem("MDSFrameWork/Settings")]
+        [MenuItem("AqueleFrameWork/Settings")]
         static void ProjectSettings()
         {
             AFFoulderStructWindow.Init();
