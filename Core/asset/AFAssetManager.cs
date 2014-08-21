@@ -1,23 +1,144 @@
 ﻿using System;
-using System.Collections.Generic
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 using AFFrameWork.Sound;
 
-namespace AFFrameWork.Core
+namespace AFFrameWork.Core.Assets
 {
 
     public class AFAssetManager : ASingleton<AFAssetManager>
     {
+        public static string iphonePath = "Resources/IOS/";
+        public static string androidPath = "Resources/Android/";
+        public static string windowsPhone8Path = "Resources/WP8/";
+        public static string commumPath = "Resources/Commum/";
+        public static string package = "com.globo.sitio.games";
+
         protected Dictionary<string, Texture> m_textures = new Dictionary<string,Texture>();
-
         protected Dictionary<string , AFSound> m_sounds = new Dictionary<string,AFSound>();
-
         protected Dictionary<string , GameObject> m_prefabs = new Dictionary<string,GameObject>();
-
         protected Dictionary<string , object> m_custom = new Dictionary<string,object>();
 
+        protected Dictionary<string, AFPool> m_pool = new Dictionary<string, AFPool>();
+
+        public void Load<T>( string name , string path ) where T : UnityEngine.Object
+        {
+            T res = null;
+
+            try
+            {
+                res = Resources.Load<T>(path);
+
+                UnityEngine.Debug.Log("I'll store an object of: " + typeof(T).ToString());
+
+                Add( name, res );
+            }
+            catch( NullReferenceException nullEx )
+            {
+                UnityEngine.Debug.LogError("The asset was not found: " + nullEx.Message);
+            }
+            catch( Exception ex )
+            {
+                //TODO: Discover what happens when unity throw this error
+                UnityEngine.Debug.LogError("The asset was not found: " + ex.Message);
+            }
+        }
+
+
+        public AFPool CreatePool( string name , string assetName , uint qtd , uint maxPoolObjects = 0)
+        {
+            AFPool pool = null;
+
+            if( qtd > 1 )
+            {
+
+                object obj = GetAsset(assetName);
+
+                if ( obj != null )
+                {
+
+                    pool = AFObject.Create<AFPool>(name);
+                    pool.Init(name, maxPoolObjects );
+
+                    pool.transform.parent = this.gameObject.transform;
+
+                    if( obj.GetType().IsSubclassOf( typeof(UnityEngine.Object) ) )
+                    {
+                        UnityEngine.Debug.Log("Creating a object from a instance");
+                        pool.Create((UnityEngine.Object)obj, qtd);
+                    }
+                    else
+                    {
+                        UnityEngine.Debug.Log("Creating a object from a Type");
+                        pool.Create(obj.GetType(), (int)qtd );
+                    }
+
+                    m_pool.Add(name, pool);
+                }
+                else
+                {
+                    UnityEngine.Debug.LogError(" The asset not exists " + assetName);
+                }
+            }
+            else
+            {
+                UnityEngine.Debug.LogError(" The pool should be more than one");
+            }
+
+            return pool;
+        }
         
+        public void Add( string name , object obj )
+        {
+            if( obj != null )
+            {
+                m_custom.Add(name , obj);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("Object could not be null");
+            }
+
+        }
+
+        public void Add(string name, AFSound sound)
+        {
+            if ( sound != null)
+            {
+                m_sounds.Add(name, sound);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("AFSound could not be null");
+            }
+        }
+
+        public void Add(string name, GameObject gameObject)
+        {
+            if ( gameObject != null)
+            {
+                m_prefabs.Add(name, gameObject);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("GameObject could not be null");
+            }
+        }
+
+        public void Add(string name, Texture texture)
+        {
+            if (texture != null)
+            {
+                m_textures.Add(name, texture);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("Texture could not be null");
+            }
+        }
+
         public Texture GetTexture( string name )
         {
             if( m_textures.ContainsKey( name ) )
@@ -26,8 +147,6 @@ namespace AFFrameWork.Core
             }
             
             UnityEngine.Debug.LogWarning("Texture " + name + " was not found!");
-
-
             return null;
         }
 
@@ -38,7 +157,7 @@ namespace AFFrameWork.Core
                 return m_prefabs[name];
             }
             
-            UnityEngine.Debug.LogWarning("Prefeb: " + name + " was not found!");
+            UnityEngine.Debug.LogWarning( "Prefeb: " + name + " was not found!" );
 
 
             return null;
@@ -53,24 +172,133 @@ namespace AFFrameWork.Core
             
             UnityEngine.Debug.LogWarning(" AFSound: " + name + " was not found!");
 
-
             return null;
         }
 
-        public AFSound GetAFSound( string name )
+        public void Delete( string name )
         {
-            if( m_sounds.ContainsKey( name ) )
+            if( m_textures.ContainsKey(name ) )
             {
-                return m_sounds[name];
+                m_textures.Remove(name);
+            }
+            else if ( m_sounds.ContainsKey(name))
+            {
+                m_sounds[name].Destroy();
+                m_sounds.Remove(name);
+            }
+            else if( m_prefabs.ContainsKey(name ) )
+            {
+                GameObject.Destroy(m_prefabs[name]);
+                m_prefabs.Remove(name);
+            }
+            else if( m_custom.ContainsKey(name ) )
+            {
+                m_custom.Remove(name);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("The asset: " + name + " was not found");
+            }
+        }
+
+        public bool HasAsset( string name )
+        {
+            if ( m_textures.ContainsKey(name) || 
+                m_sounds.ContainsKey(name) ||
+                m_prefabs.ContainsKey(name) ||
+                m_custom.ContainsKey(name))
+            {
+                return true;
             }
             
-            UnityEngine.Debug.LogWarning(" AFSound: " + name + " was not found!");
+            return false;
+        }
 
+        private object GetAsset(string name)
+        {
+            object obj = null;
 
-            return null;
+            if (m_textures.ContainsKey(name))
+            {
+                obj = m_textures[name];
+            }
+            if(m_sounds.ContainsKey(name) )
+            {
+                obj = m_sounds[name];
+            }
+            if(m_prefabs.ContainsKey(name))
+            {
+                obj = m_prefabs[name];
+            }
+            if (m_custom.ContainsKey(name))
+            {
+                obj = m_custom[name];
+            }
+
+            return obj;
         }
 
 
+        public void DisposeAll()
+        {
+            m_textures = new Dictionary<string,Texture>();
+            m_sounds = new Dictionary<string,AFSound>();
+            m_prefabs = new Dictionary<string,GameObject>();
+            m_custom = new Dictionary<string,object>();
+        }
+
+        public static string GetPathTargetPlatform()
+        {
+            #if UNITY_IPHONE
+                return iphonePath;
+            #elif UNITY_ANDROID
+                return androidPath;
+            #elif UNITY_WP8
+                return windowsPhone8Path;
+            #else
+                return GetCommumPath();
+            #endif
+        }
+
+        public static string GetPathTargetPlatformWithResolution()
+        {
+            #if UNITY_IPHONE
+                return iphonePath + GetResolutionFolder();
+            #elif UNITY_ANDROID
+                return androidPath + GetResolutionFolder();
+            #elif UNITY_WP8
+                return windowsPhone8Path + GetResolutionFolder();
+            #else
+                return GetCommumPath() + GetResolutionFolder();
+            #endif
+        }
+
+
+        public static string GetResolutionFolder()
+        {
+
+
+            if (Screen.dpi == 1080)
+            {
+                  
+            }
+            else if (Screen.dpi == 1080)
+            {
+
+            }
+            else if (Screen.dpi == 1080 )
+            {
+
+            }
+
+
+            return "";
+        }
+
+        public static string GetCommumPath()
+        {
+            return commumPath;
+        }
 
     }
 }

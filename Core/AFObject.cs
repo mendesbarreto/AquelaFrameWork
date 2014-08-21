@@ -8,9 +8,13 @@ namespace AFFrameWork.Core
     public class AFObject : MonoBehaviour
     {
         
-        public static T Create<T>() where T : MonoBehaviour
+        public static T Create<T>( string name = "") where T : MonoBehaviour
         {
-            return new GameObject(typeof(T).ToString()).AddComponent<T>();
+            if( name.Equals("") )
+                return new GameObject(typeof(T).ToString()).AddComponent<T>();
+
+
+            return new GameObject(typeof(T).ToString() + ": " + name).AddComponent<T>();
         }
     }
 }

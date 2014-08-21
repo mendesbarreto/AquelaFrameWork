@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using AFFrameWork.Core;
 
 namespace AFFrameWork.Sound
 {
-    public class AFSound
+    public class AFSound : AFObject
     {
         protected float m_volume;
         protected float m_pitch;

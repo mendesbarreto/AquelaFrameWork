@@ -5,6 +5,8 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+using AFFrameWork.Core.Assets;
+
 namespace AFFrameWork.Core.Window
 {
 
@@ -12,13 +14,6 @@ namespace AFFrameWork.Core.Window
     public class AFFoulderStructWindow : EditorWindow
     {
         static public AFFoulderStructWindow window;
-
-        private string m_iphonePath = "Resources/IOS/";
-        private string m_androidPath = "Resources/Android/";
-        private string m_windowsPhone8Path = "Resources/WP8/";
-        private string m_commumPath = "Resources/Commum/";
-
-        private string m_package = "com.globo.sitio.games";
 
         public const string DIRECTORY_NAME_ASSETS = "Assets";
         public const string DIRECTORY_NAME_LARGE = "Large";
@@ -38,16 +33,16 @@ namespace AFFrameWork.Core.Window
         void OnGUI()
         {
             GUILayout.Label("Package ");
-            m_package = EditorGUILayout.TextField(m_package);
+            AFAssetManager.package = EditorGUILayout.TextField(AFAssetManager.package);
 
             GUILayout.Label("Iphone Path ");
-            m_iphonePath = EditorGUILayout.TextField(m_iphonePath);
+            AFAssetManager.iphonePath = EditorGUILayout.TextField(AFAssetManager.iphonePath);
 
             GUILayout.Label("Android Path");
-            m_androidPath = EditorGUILayout.TextField(m_androidPath);
+            AFAssetManager.androidPath = EditorGUILayout.TextField(AFAssetManager.androidPath);
 
             GUILayout.Label("Windows Phone 8 ");
-            m_windowsPhone8Path = EditorGUILayout.TextField(m_windowsPhone8Path);
+            AFAssetManager.windowsPhone8Path = EditorGUILayout.TextField(AFAssetManager.windowsPhone8Path);
 
             GUILayout.BeginArea( new Rect( (window.position.width * 0.5f) - 100 , (window.position.height * 0.8f) , 200, 200));
 
@@ -62,27 +57,27 @@ namespace AFFrameWork.Core.Window
 
         private void GenerateDirectoriesForTheCurrentProject()
         {
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/"  + m_iphonePath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_iphonePath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_iphonePath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_LARGE);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_SMALL);
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_androidPath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_androidPath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_androidPath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_LARGE);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_SMALL);
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_windowsPhone8Path + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_windowsPhone8Path + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_windowsPhone8Path + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_LARGE);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_SMALL);
 
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_commumPath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_commumPath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + m_commumPath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_LARGE);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_SMALL);
 
             Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + DIRECTORY_NAME_SOUND );
             Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + DIRECTORY_NAME_DATA);
 
-            string[] foldersName = m_package.Split('.');
+            string[] foldersName = AFAssetManager.package.Split('.');
             string folder = "";
             int i = 0;
 

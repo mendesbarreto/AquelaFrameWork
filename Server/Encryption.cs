@@ -16,7 +16,7 @@ namespace AFFrameWork.Server
                 if (Key == null || Key.Length <= 0)
                     throw new ArgumentNullException("Key");
                 if (IV == null || IV.Length <= 0)
-                    throw new ArgumentNullException("Key");
+                    throw new ArgumentNullException("IV");
                 byte[] encrypted;
                 // Create an RijndaelManaged object
                 // with the specified key and IV.
@@ -60,7 +60,7 @@ namespace AFFrameWork.Server
                 if (Key == null || Key.Length <= 0)
                     throw new ArgumentNullException("Key");
                 if (IV == null || IV.Length <= 0)
-                    throw new ArgumentNullException("Key");
+                    throw new ArgumentNullException("IV");
 
                 // Declare the string used to hold
                 // the decrypted text.
