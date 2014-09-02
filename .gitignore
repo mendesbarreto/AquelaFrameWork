@@ -3,11 +3,14 @@
 *.lo
 *.o
 *.obj
+*.meta
+*.TMP
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
+
 
 # Compiled Static libraries
 *.lai
