@@ -20,7 +20,7 @@ namespace AFFrameWork.Sound
         protected bool m_isPlaying;
         protected bool m_loop;
 
-        protected MSSoundManager m_manager;
+        protected AFSoundManager m_manager;
 
         public AFSound( 
             string name, 
@@ -39,7 +39,7 @@ namespace AFFrameWork.Sound
             m_isPlaying = false;
             m_loop = loop;
 
-            m_manager = MSSoundManager.Instance;
+            m_manager = AFSoundManager.Instance;
 
             //Abandon all hope ye who enter beyond this point
             //I'm sorry, but our princess is in another castle.

@@ -16,6 +16,15 @@ namespace AFFrameWork.Core.Assets
         public static string commumPath = "Resources/Commum/";
         public static string package = "com.globo.sitio.games";
 
+        public static readonly string DIRECTORY_NAME_ASSETS = "Assets";
+        public static readonly string DIRECTORY_NAME_HIGH = "High";
+        public static readonly string DIRECTORY_NAME_XHIGH = "ExtraHigh";
+        public static readonly string DIRECTORY_NAME_LOW = "Low";
+        public static readonly string DIRECTORY_NAME_MEDIUM = "Medium";
+        public static readonly string DIRECTORY_NAME_SOUND = "Sounds";
+        public static readonly string DIRECTORY_NAME_DATA = "Data";
+        public static readonly string DIRECTORY_NAME_SCRIPTS = "Scripts";
+
         protected Dictionary<string, Texture> m_textures = new Dictionary<string,Texture>();
         protected Dictionary<string , AFSound> m_sounds = new Dictionary<string,AFSound>();
         protected Dictionary<string , GameObject> m_prefabs = new Dictionary<string,GameObject>();
@@ -262,37 +271,32 @@ namespace AFFrameWork.Core.Assets
 
         public static string GetPathTargetPlatformWithResolution()
         {
-            #if UNITY_IPHONE
-                return iphonePath + GetResolutionFolder();
-            #elif UNITY_ANDROID
-                return androidPath + GetResolutionFolder();
-            #elif UNITY_WP8
-                return windowsPhone8Path + GetResolutionFolder();
-            #else
-                return GetCommumPath() + GetResolutionFolder();
-            #endif
+            return ( GetPathTargetPlatform() + GetResolutionFolder() );
         }
 
 
         public static string GetResolutionFolder()
         {
+            UnityEngine.Debug.Log("DPI DA TELA: " + Screen.dpi);
 
-
-            if (Screen.dpi == 1080)
+            if (Screen.dpi > 290 )
             {
-                  
+                return DIRECTORY_NAME_XHIGH;
             }
-            else if (Screen.dpi == 1080)
+            else if (Screen.dpi > 200 && Screen.dpi <= 290 )
             {
-
+                return DIRECTORY_NAME_HIGH;
             }
-            else if (Screen.dpi == 1080 )
+            else if ( Screen.dpi >= 150  && Screen.dpi <= 200 )
             {
-
+                return DIRECTORY_NAME_MEDIUM;
+            }
+            else if( Screen.dpi < 150 )
+            {
+                return DIRECTORY_NAME_LOW;
             }
 
-
-            return "";
+            return DIRECTORY_NAME_LOW;
         }
 
         public static string GetCommumPath()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AFFrameWork.Input
 {
-    class MDSInput
+    public class AFInput
     {
     }
 }

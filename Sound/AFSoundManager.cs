@@ -14,22 +14,20 @@ using Signals;
 
 namespace AFFrameWork.Sound
 {
-    public class MSSoundManager : ASingleton<MSSoundManager>
+    public class AFSoundManager : ASingleton<AFSoundManager>
     {
-        private string m_relativePath = "";
-        private bool m_autoLoad = false;
         private Dictionary<string, AFSoundGroup> m_groups = new Dictionary<string, AFSoundGroup>();
         private Dictionary<string, AFSound> m_audios = new Dictionary<string, AFSound>();
 
+        public readonly Signal<bool> OnMute = new Signal<bool>();
         public readonly Signal<AFSound> OnAudioPlay = new Signal<AFSound>();
         public readonly Signal<AFSound> OnAudioAdd = new Signal<AFSound>();
+        public readonly Signal<string> OnAudioRemove = new Signal<string>();
         public readonly Signal<AFSound> OnAudioPause = new Signal<AFSound>();
         public readonly Signal<AFSound> OnAudioStop = new Signal<AFSound>();
 
         public int audiosInList = 0;
-
-
-        public readonly Signal<bool> OnMute = new Signal<bool>();
+        protected bool m_mute = false;
 
         public AFSound Add( string name )
         {
@@ -53,6 +51,8 @@ namespace AFFrameWork.Sound
                 {
                     audio = new AFSound(name, audioClip, emitter, volume, pitch, loop);
                     m_audios[name] = audio;
+
+                    OnAudioAdd.Dispatch(audio);
                 }
             }
             else
@@ -67,17 +67,18 @@ namespace AFFrameWork.Sound
 
         public void Remove(string name)
         {
-           if( m_audios.ContainsKey(name))
-           {
-               Remove(m_audios[name]);
-           }
-           else
-           {
-               UnityEngine.Debug.LogWarning("The name was not found in the audio list");
-           }
+            if (m_audios.ContainsKey(name))
+            {
+                Remove(m_audios[name]);
+                OnAudioRemove.Dispatch(name);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("The name was not found in the audio list");
+            }
         }
 
-        public void Remove( AFSound audio )
+        public void Remove(AFSound audio)
         {
             audio.Destroy();
             m_audios.Remove(audio.GetName());
@@ -100,15 +101,23 @@ namespace AFFrameWork.Sound
             if (!m_audios.ContainsKey(name))
                 throw new Exception("Audio not exists");
 
-            AFSound audio = m_audios[name];
-            OnAudioStop.Dispatch(audio);
 
-            return audio.Stop();
+            return Stop(m_audios[name]);
         }
+
+        public AudioSource Stop(AFSound sound)
+        {
+            OnAudioStop.Dispatch(sound);
+            return sound.Stop();
+        }
+
 
         public void StopAll()
         {
-
+            foreach( KeyValuePair<string, AFSound> keypair in m_audios )
+            {
+                Stop(keypair.Value);
+            }
         }
 
         public AFSound GetAudio( string name )
@@ -124,12 +133,24 @@ namespace AFFrameWork.Sound
             if (!m_audios.ContainsKey(name))
                 throw new Exception("Audio not exists");
 
-            return m_audios[name].Pause();
+            return Pause(m_audios[name]);
+        }
+
+        private AudioSource Pause(AFSound sound)
+        {
+            if (!m_audios.ContainsKey(name))
+                throw new Exception("Audio not exists");
+
+            OnAudioPause.Dispatch(sound);
+            return sound.Pause();
         }
 
         public void PauseAll()
         {
-
+            foreach (KeyValuePair<string, AFSound> entry in m_audios)
+            {
+                Pause(entry.Value);
+            }
         }
 
         public AudioSource Play( string name )
@@ -203,25 +224,27 @@ namespace AFFrameWork.Sound
             return source;
         }
 
-        public void SetRelativePath(string path)
+        public bool GetMute()
         {
-            m_relativePath = path;
+            return m_mute;
         }
 
-        public string GetRelativePath()
-        {
-            return m_relativePath;
-        }
-
-        public void SetAutoLoad(bool value)
+        public void SetMute(bool value)
         {
 
+            if (value != m_mute)
+            {
+                foreach (KeyValuePair<string, AFSound> keypair in m_audios)
+                {
+                    keypair.Value.GetAudioSource().mute = value;
+                }
+            }
+
+            OnMute.Dispatch(m_mute);
+
+            m_mute = value;
         }
 
-        public bool GetAutoLoad()
-        {
-            return m_autoLoad;
-        }
 
     }
 }

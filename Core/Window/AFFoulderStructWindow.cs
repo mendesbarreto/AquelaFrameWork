@@ -15,14 +15,6 @@ namespace AFFrameWork.Core.Window
     {
         static public AFFoulderStructWindow window;
 
-        public const string DIRECTORY_NAME_ASSETS = "Assets";
-        public const string DIRECTORY_NAME_LARGE = "Large";
-        public const string DIRECTORY_NAME_SMALL = "Small";
-        public const string DIRECTORY_NAME_MEDIUM = "Medium";
-        public const string DIRECTORY_NAME_SOUND = "Sounds";
-        public const string DIRECTORY_NAME_DATA = "Data";
-        public const string DIRECTORY_NAME_SCRIPTS = "Scripts";
-
         [MenuItem("Window/Settings")]
         public static void Init()
         {
@@ -57,25 +49,25 @@ namespace AFFrameWork.Core.Window
 
         private void GenerateDirectoriesForTheCurrentProject()
         {
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_LARGE);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + DIRECTORY_NAME_SMALL);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + DIRECTORY_NAME_SOUND );
-            Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + DIRECTORY_NAME_DATA);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_SOUND);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_DATA);
 
             string[] foldersName = AFAssetManager.package.Split('.');
             string folder = "";
@@ -87,8 +79,17 @@ namespace AFFrameWork.Core.Window
             }
 
             UnityEngine.Debug.Log(folder);
-
+            /*
             Directory.CreateDirectory(DIRECTORY_NAME_ASSETS + "/" + DIRECTORY_NAME_SCRIPTS +  folder);
+
+            GameObject go = new GameObject(typeof(AFEngine).ToString());
+            go.AddComponent<AFEngine>();
+            go.transform.position = Vector2.zero;
+            PrefabUtility.CreatePrefab(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + go.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
+
+            UnityEngine.Debug.Log(DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath);
+
+             * */
         }
     }
 }
