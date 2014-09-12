@@ -49,25 +49,25 @@ namespace AFFrameWork.Core.Window
 
         private void GenerateDirectoriesForTheCurrentProject()
         {
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.iphonePath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.androidPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.windowsPhone8Path + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
 
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_HIGH);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_MEDIUM);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + "/" + AFAssetManager.DIRECTORY_NAME_LOW);
 
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_SOUND);
-            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_DATA);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_SOUND);
+            Directory.CreateDirectory(AFAssetManager.DIRECTORY_NAME_RESOURCES + "/" + AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_DATA);
 
             string[] foldersName = AFAssetManager.package.Split('.');
             string folder = "";

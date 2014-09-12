@@ -9,6 +9,5 @@ namespace AFFrameWork.View
     {
         protected string m_name;
         protected Texture2D m_texture = null;
-        
     }
 }

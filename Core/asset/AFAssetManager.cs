@@ -10,10 +10,10 @@ namespace AFFrameWork.Core.Assets
 
     public class AFAssetManager : ASingleton<AFAssetManager>
     {
-        public static string iphonePath = "Resources/IOS/";
-        public static string androidPath = "Resources/Android/";
-        public static string windowsPhone8Path = "Resources/WP8/";
-        public static string commumPath = "Resources/Commum/";
+        public static string iphonePath = "IOS/";
+        public static string androidPath = "Android/";
+        public static string windowsPhone8Path = "WP8/";
+        public static string commumPath = "Common/";
         public static string package = "com.globo.sitio.games";
 
         public static readonly string DIRECTORY_NAME_ASSETS = "Assets";
@@ -24,6 +24,7 @@ namespace AFFrameWork.Core.Assets
         public static readonly string DIRECTORY_NAME_SOUND = "Sounds";
         public static readonly string DIRECTORY_NAME_DATA = "Data";
         public static readonly string DIRECTORY_NAME_SCRIPTS = "Scripts";
+        public static readonly string DIRECTORY_NAME_RESOURCES= "Resources";
 
         protected Dictionary<string, Texture> m_textures = new Dictionary<string,Texture>();
         protected Dictionary<string , AFSound> m_sounds = new Dictionary<string,AFSound>();
@@ -265,7 +266,7 @@ namespace AFFrameWork.Core.Assets
             #elif UNITY_WP8
                 return windowsPhone8Path;
             #else
-                return GetCommumPath();
+            return GetCommumPath();
             #endif
         }
 

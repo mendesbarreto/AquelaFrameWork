@@ -41,14 +41,14 @@ namespace AFFrameWork.Core
             
             go = GameObject.Find( typeof(AFEngine).ToString() );
 
-            UnityEngine.Debug.Log(go);
+            //UnityEngine.Debug.Log(go);
 
             if ( go == null )
             {
                 go = new GameObject(typeof(AFEngine).ToString());
                 go.AddComponent<AFEngine>();
                 go.transform.position = Vector2.zero;
-                PrefabUtility.CreatePrefab(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.commumPath + go.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
+                PrefabUtility.CreatePrefab(AFAssetManager.DIRECTORY_NAME_ASSETS + "/" + AFAssetManager.DIRECTORY_NAME_RESOURCES +"/" + AFAssetManager.commumPath + go.name + ".prefab", go, ReplacePrefabOptions.ReplaceNameBased);
             }
             
         }

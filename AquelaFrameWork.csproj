@@ -48,14 +48,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AFInitialization.cs" />
+    <Compile Include="Core\AquelaFrameWork.cs" />
     <Compile Include="Core\ASingleton.cs" />
     <Compile Include="Core\asset\AFPool.cs" />
+    <Compile Include="Core\asset\AFTextureAtlas.cs" />
+    <Compile Include="Core\asset\AFTextureInfo.cs" />
+    <Compile Include="Core\asset\AFTexturePackerProperties.cs" />
     <Compile Include="Core\AState.cs" />
-    <Compile Include="Core\Events\AFSFSEvent.cs" />
-    <Compile Include="Core\Events\AFEventArgs.cs" />
     <Compile Include="Core\asset\AFAssetManager.cs" />
     <Compile Include="Core\AqueleFrameWork.cs" />
     <Compile Include="Core\AFEngine.cs" />
+    <Compile Include="Core\IDisposeble.cs" />
     <Compile Include="Core\Window\AFFoulderStructWindow.cs" />
     <Compile Include="Core\Window\AFSmartFoxServerWindow.cs" />
     <Compile Include="Input\AFInput.cs" />
@@ -70,11 +74,15 @@
     <Compile Include="Sound\AFSound.cs" />
     <Compile Include="Sound\AFSoundGroup.cs" />
     <Compile Include="Sound\AFSoundSequence.cs" />
+    <Compile Include="Utils\Utility.cs" />
+    <Compile Include="View\AFAnimation.cs" />
+    <Compile Include="View\AFAnimationController.cs" />
+    <Compile Include="View\AFMovieClip.cs" />
+    <Compile Include="View\AFSprite.cs" />
+    <Compile Include="View\AFSpriteHandler.cs" />
+    <Compile Include="View\IAnimatable.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\GitHub\SignalsFrameWork\SignalsCSharp.csproj">
       <Project>{2d80964f-a6de-40f9-90f0-7953168e3321}</Project>
