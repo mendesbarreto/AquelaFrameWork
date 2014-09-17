@@ -5,12 +5,10 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-using AFFrameWork.Core.Assets;
+using AFFrameWork.Core.Asset;
 
 namespace AFFrameWork.Core.Window
 {
-
-    
     public class AFFoulderStructWindow : EditorWindow
     {
         static public AFFoulderStructWindow window;

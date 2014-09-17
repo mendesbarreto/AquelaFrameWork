@@ -5,7 +5,7 @@ using UnityEngine;
 
 using AFFrameWork.Sound;
 
-namespace AFFrameWork.Core.Assets
+namespace AFFrameWork.Core.Asset
 {
 
     public class AFAssetManager : ASingleton<AFAssetManager>

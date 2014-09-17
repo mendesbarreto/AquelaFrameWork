@@ -74,6 +74,7 @@
     <Compile Include="Sound\AFSound.cs" />
     <Compile Include="Sound\AFSoundGroup.cs" />
     <Compile Include="Sound\AFSoundSequence.cs" />
+    <Compile Include="Utils\AFCSVHelper.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="View\AFAnimation.cs" />
     <Compile Include="View\AFAnimationController.cs" />

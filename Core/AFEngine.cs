@@ -31,7 +31,7 @@ using AFFrameWork.Sound;
 
 using UnityEngine;
 
-using AFFrameWork.Core.Assets;
+using AFFrameWork.Core.Asset;
 
 namespace AFFrameWork.Core
 {

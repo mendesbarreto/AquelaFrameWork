@@ -4,7 +4,7 @@ using System.Collections;
 
 using UnityEngine;
 
-namespace AFFrameWork.Core.Assets
+namespace AFFrameWork.Core.Asset
 {
     public class AFPool : AFObject
     {

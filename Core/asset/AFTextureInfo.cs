@@ -9,7 +9,6 @@ namespace AFFrameWork.Core.Asset
     internal class AFTextureInfo
     {
         private string m_name;
-        private Rect m_region;
         private Rect m_frame;
         private Vector2 m_pivot;
         private bool m_rotated;
@@ -19,25 +18,13 @@ namespace AFFrameWork.Core.Asset
 
         }
 
-        public AFTextureInfo(string name,/* Rect region, */Rect frame, Vector2 pivot,bool rotated = false)
+        public AFTextureInfo(string name,Rect frame, Vector2 pivot,bool rotated = false)
         {
             m_name = name;
-            //m_region = region;
             m_frame = frame;
             m_rotated = rotated;
             m_pivot = pivot;
         }
-
-        /*public void SetRegion(Rect value)
-        {
-            m_region = value;
-        }
-
-        public Rect GetRegion()
-        {
-            return m_region;
-        }
-*/
 
         public void SetPivot(Vector2 value)
         {
@@ -79,7 +66,13 @@ namespace AFFrameWork.Core.Asset
         {
             return m_name;
         }
-
-
+        public override string ToString()
+        {
+            return  "TextureInfo " + 
+                    "Name: " + m_name + "\n" +
+                    "Frame X: " + m_frame.x  + " Y: " + m_frame.y + " W: " + m_frame.width + " H: " + m_frame.height + "\n" +
+                    "Pivot X: " + m_pivot.x + " Y: " + m_pivot.y + "\n" + 
+                    "Rotated: " + m_rotated.ToString();
+        }
     }
 }

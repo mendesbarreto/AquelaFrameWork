@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-using AFFrameWork.Core.Assets;
+using AFFrameWork.Core.Asset;
 using AFFrameWork.Core.Window;
 
 namespace AFFrameWork.Core
