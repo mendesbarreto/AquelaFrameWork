@@ -99,6 +99,21 @@ namespace AFFrameWork.View
             }
         }
 
+        public void GotoAndPlay( int frameID )
+        {
+            if (frameID < 0 || frameID > GetTotalFrames()) throw new ArgumentException("Invalid frame id");
+            m_currentFrame = frameID;
+            m_spriteRender.sprite = m_sprites[m_currentFrame];
+            Play();
+        }
+        public void GotoAndStop(int frameID)
+        {
+            if (frameID < 0 || frameID > GetTotalFrames()) throw new ArgumentException("Invalid frame id");
+            m_currentFrame = frameID;
+            m_spriteRender.sprite = m_sprites[m_currentFrame];
+            Stop();
+        }
+
         public void Play()
         {
             m_playing = true;
@@ -107,17 +122,19 @@ namespace AFFrameWork.View
         public void Stop()
         {
             m_playing = false;
+            m_currentFrame = 0;
+            m_currentTime = 0;
+            m_spriteRender.sprite = m_sprites[m_currentFrame];
         }
 
         public void Pause()
         {
             m_playing = false;
-            m_currentFrame = 0;
         }
 
         public void AdvanceTime(double time)
         {
-            if (!m_playing || time <= 0.0f) return;
+            if (!m_playing || !this.gameObject.activeSelf || time <= 0.0f) return;
 
 
             int finalFrame = 0;
