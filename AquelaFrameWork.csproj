@@ -76,11 +76,10 @@
     <Compile Include="Sound\AFSoundSequence.cs" />
     <Compile Include="Utils\AFCSVHelper.cs" />
     <Compile Include="Utils\Utility.cs" />
-    <Compile Include="View\AFAnimation.cs" />
-    <Compile Include="View\AFAnimationStatesController.cs" />
     <Compile Include="View\AFMovieClip.cs" />
     <Compile Include="View\AFSprite.cs" />
     <Compile Include="View\AFSpriteHandler.cs" />
+    <Compile Include="View\AFStatesController.cs" />
     <Compile Include="View\IAnimatable.cs" />
   </ItemGroup>
   <ItemGroup />
