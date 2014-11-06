@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace AFFrameWork.Sound
+namespace AquelaFrameWork.Sound
 {
     public class AFSoundSequence : MonoBehaviour
     {

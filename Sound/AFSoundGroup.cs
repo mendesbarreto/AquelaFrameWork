@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AFFrameWork.Sound
+namespace AquelaFrameWork.Sound
 {
     public class AFSoundGroup
     {

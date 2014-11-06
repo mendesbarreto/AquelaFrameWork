@@ -4,10 +4,10 @@ using System.Linq;
 
 using UnityEngine;
 
-using AFFrameWork.Core;
+using AquelaFrameWork.Core;
 
 
-namespace AFFrameWork.View
+namespace AquelaFrameWork.View
 {
     public class AFStatesController : AFObject , IAnimatable
     {

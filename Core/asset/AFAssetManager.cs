@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-using AFFrameWork.Sound;
+using AquelaFrameWork.Sound;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
 
     public class AFAssetManager : ASingleton<AFAssetManager>

@@ -4,15 +4,18 @@
 //
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using UnityEngine;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using AFFrameWork.Core;
+using UnityEngine;
+
+using AquelaFrameWork.Core;
+
 using Signals;
 
-namespace AFFrameWork.Sound
+namespace AquelaFrameWork.Sound
 {
     public class AFSoundManager : ASingleton<AFSoundManager>
     {

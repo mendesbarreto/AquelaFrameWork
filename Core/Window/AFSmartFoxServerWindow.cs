@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-namespace AFFrameWork.Core.Window
+namespace AquelaFrameWork.Core.Window
 {
     public class AFSmartFoxServerWindow : EditorWindow
     {

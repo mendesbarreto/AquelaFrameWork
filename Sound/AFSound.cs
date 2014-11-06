@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 
 using UnityEngine;
-using AFFrameWork.Core;
 
-namespace AFFrameWork.Sound
+using AquelaFrameWork.Core;
+
+namespace AquelaFrameWork.Sound
 {
     public class AFSound : AFObject
     {

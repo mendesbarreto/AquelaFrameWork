@@ -5,14 +5,14 @@ using System.IO;
 
 using UnityEngine;
 
-using AFFrameWork.Core;
-using AFFrameWork.Core.Asset;
-using AFFrameWork.Utils;
+using AquelaFrameWork.Core;
+using AquelaFrameWork.Core.Asset;
+using AquelaFrameWork.Utils;
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+//using Newtonsoft.Json;
+//using Newtonsoft.Json.Linq;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
     public class AFTextureAtlas
     {
@@ -189,88 +189,88 @@ namespace AFFrameWork.Core.Asset
 
         private void ParseJsonFile(string path)
         {
-            TextAsset json = Resources.Load<TextAsset>(path);
-
-            if(json != null)
-            { 
-                AFTextureInfo info;
-                JObject obj = JObject.Parse(json.text);
-                JArray arr = obj.GetValue("frames").ToObject<JArray>();
-                JObject textureObject;
-
-                int i;
-                int hashValue;
-                int count = arr.Count;
-
-                for (i = 0; i < count; ++i)
-                {
-                    info = new AFTextureInfo();
-                    textureObject = arr[i].ToObject<JObject>();
-
-                    foreach (KeyValuePair<string, JToken> property in textureObject)
-                    {
-                        hashValue = Utility.Hash(property.Key);
-
-                        if ( AFTexturePackerProperties.FILE_NAME == hashValue )
-                        {
-                            info.SetName(property.Value.ToString());
-                        }
-                        else if (AFTexturePackerProperties.FRAME == hashValue)
-                        {
-                            JObject frame = JObject.Parse(property.Value.ToString());
-                            info.SetFrame( new Rect( 
-                                (float)frame.GetValue("x") , 
-                                (float)frame.GetValue("y") , 
-                                (float)frame.GetValue("w") , 
-                                (float)frame.GetValue("h")) );
-                        }
-                        else if (AFTexturePackerProperties.ROTATED == hashValue)
-                        {
-                            info.SetRotated(property.Value.ToString() == "false" ? false : true);
-                        }
-                        else if (AFTexturePackerProperties.PIVOT == hashValue)
-                        {
-                            JObject pivot = JObject.Parse(property.Value.ToString());
-                            info.SetPivot(new Vector2(
-                                float.Parse(pivot.GetValue("x").ToString()),
-                                float.Parse(pivot.GetValue("y").ToString()) ) );
-                        }
-
-                        AddTextureInfo(info);
-
-                        //Debug.Log(property.Key);
-                        //Debug.Log(property.Value.ToString());
-                        /**
-                         * IF SOME DAY USE THE FOLLOW PROPERTIES 
-                         * 
-                        else if (AFTexturePackerProperties.SPRITE_SOURCE_SIZE == hashValue)
-                        {
-
-                        }
-                        else if (AFTexturePackerProperties.TRIMED == hashValue)
-                        {
-
-                        }
-
-                        else if (AFTexturePackerProperties.SOURCE_SIZE == hashValue)
-                        {
-
-                        }**/
-                    }
-                    /*
-                    info = new AFTextureInfo();
-                    info.SetName(consult.GetValue(AFTexturePackerProperties.FILE_NAME).ToString());
-                    info.SetRotated(consult.GetValue(AFTexturePackerProperties.ROTATED).ToString() == "false " ? false : true);
-                
-                    consult.GetValue(AFTexturePackerProperties.FILE_NAME)
-                    info.SetFrame(new Rect( ))
-                    */
-                }
-            }
-            else
-            {
-                throw new FileLoadException("O arquivo nao foi encontrado!!!");
-            }
+//             TextAsset json = Resources.Load<TextAsset>(path);
+// 
+//             if(json != null)
+//             { 
+//                 AFTextureInfo info;
+//                 JObject obj = JObject.Parse(json.text);
+//                 JArray arr = obj.GetValue("frames").ToObject<JArray>();
+//                 JObject textureObject;
+// 
+//                 int i;
+//                 int hashValue;
+//                 int count = arr.Count;
+// 
+//                 for (i = 0; i < count; ++i)
+//                 {
+//                     info = new AFTextureInfo();
+//                     textureObject = arr[i].ToObject<JObject>();
+// 
+//                     foreach (KeyValuePair<string, JToken> property in textureObject)
+//                     {
+//                         hashValue = Utility.Hash(property.Key);
+// 
+//                         if ( AFTexturePackerProperties.FILE_NAME == hashValue )
+//                         {
+//                             info.SetName(property.Value.ToString());
+//                         }
+//                         else if (AFTexturePackerProperties.FRAME == hashValue)
+//                         {
+//                             JObject frame = JObject.Parse(property.Value.ToString());
+//                             info.SetFrame( new Rect( 
+//                                 (float)frame.GetValue("x") , 
+//                                 (float)frame.GetValue("y") , 
+//                                 (float)frame.GetValue("w") , 
+//                                 (float)frame.GetValue("h")) );
+//                         }
+//                         else if (AFTexturePackerProperties.ROTATED == hashValue)
+//                         {
+//                             info.SetRotated(property.Value.ToString() == "false" ? false : true);
+//                         }
+//                         else if (AFTexturePackerProperties.PIVOT == hashValue)
+//                         {
+//                             JObject pivot = JObject.Parse(property.Value.ToString());
+//                             info.SetPivot(new Vector2(
+//                                 float.Parse(pivot.GetValue("x").ToString()),
+//                                 float.Parse(pivot.GetValue("y").ToString()) ) );
+//                         }
+// 
+//                         AddTextureInfo(info);
+// 
+//                         //Debug.Log(property.Key);
+//                         //Debug.Log(property.Value.ToString());
+//                         /**
+//                          * IF SOME DAY USE THE FOLLOW PROPERTIES 
+//                          * 
+//                         else if (AFTexturePackerProperties.SPRITE_SOURCE_SIZE == hashValue)
+//                         {
+// 
+//                         }
+//                         else if (AFTexturePackerProperties.TRIMED == hashValue)
+//                         {
+// 
+//                         }
+// 
+//                         else if (AFTexturePackerProperties.SOURCE_SIZE == hashValue)
+//                         {
+// 
+//                         }**/
+//                     }
+//                     /*
+//                     info = new AFTextureInfo();
+//                     info.SetName(consult.GetValue(AFTexturePackerProperties.FILE_NAME).ToString());
+//                     info.SetRotated(consult.GetValue(AFTexturePackerProperties.ROTATED).ToString() == "false " ? false : true);
+//                 
+//                     consult.GetValue(AFTexturePackerProperties.FILE_NAME)
+//                     info.SetFrame(new Rect( ))
+//                     */
+//                 }
+//             }
+//             else
+//             {
+//                 throw new FileLoadException("O arquivo nao foi encontrado!!!");
+//             }
         }
 
         private void AddTextureInfo( AFTextureInfo info )

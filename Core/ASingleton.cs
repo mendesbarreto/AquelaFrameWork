@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 
-namespace AFFrameWork.Core
+using UnityEngine;
+
+namespace AquelaFrameWork.Core
 {
     public abstract class ASingleton<T> : AFObject where T : MonoBehaviour
     {
