@@ -5,7 +5,7 @@ using System.Text;
 
 using UnityEngine;
 
-namespace AFFrameWork.Utils
+namespace AquelaFrameWork.Utils
 {
     public class AFCsvRow : List<string>
     {

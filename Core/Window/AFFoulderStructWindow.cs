@@ -5,9 +5,9 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-using AFFrameWork.Core.Asset;
+using AquelaFrameWork.Core.Asset;
 
-namespace AFFrameWork.Core.Window
+namespace AquelaFrameWork.Core.Window
 {
     public class AFFoulderStructWindow : EditorWindow
     {

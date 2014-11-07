@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AFFrameWork.View
+namespace AquelaFrameWork.View
 {
     /**  
     *  The IAnimatable interface describes objects that are animated depending on the passed time. 

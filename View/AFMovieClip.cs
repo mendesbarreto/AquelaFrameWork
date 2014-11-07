@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 
 using UnityEngine;
-using AFFrameWork.Core;
-using AFFrameWork.Sound;
+using AquelaFrameWork.Core;
+using AquelaFrameWork.Sound;
 using Signals;
 
-namespace AFFrameWork.View
+namespace AquelaFrameWork.View
 {
     public class AFMovieClip : AFObject , IAnimatable
     {

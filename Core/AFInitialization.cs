@@ -2,10 +2,10 @@
 using UnityEditor;
 using UnityEngine;
 
-using AFFrameWork.Core.Asset;
-using AFFrameWork.Core.Window;
+using AquelaFrameWork.Core.Asset;
+using AquelaFrameWork.Core.Window;
 
-namespace AFFrameWork.Core
+namespace AquelaFrameWork.Core
 {
     [InitializeOnLoad]
     public class AFInitialization

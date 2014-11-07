@@ -26,14 +26,14 @@ using System;
 using System.Collections.Generic;
 
 using Signals;
-using AFFrameWork.Input;
-using AFFrameWork.Sound;
 
+using AquelaFrameWork.Input;
+using AquelaFrameWork.Sound;
 using UnityEngine;
 
-using AFFrameWork.Core.Asset;
+using AquelaFrameWork.Core.Asset;
 
-namespace AFFrameWork.Core
+namespace AquelaFrameWork.Core
 {
     class AFEngine : ASingleton<AFEngine>
     {

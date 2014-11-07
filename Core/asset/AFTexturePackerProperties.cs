@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using AFFrameWork.Utils;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
     public class AFTexturePackerProperties
     {
