@@ -75,6 +75,7 @@
     <Compile Include="Sound\AFSoundGroup.cs" />
     <Compile Include="Sound\AFSoundSequence.cs" />
     <Compile Include="Utils\AFCSVHelper.cs" />
+    <Compile Include="Utils\CryptoUtil.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="View\AFMovieClip.cs" />
     <Compile Include="View\AFSprite.cs" />
