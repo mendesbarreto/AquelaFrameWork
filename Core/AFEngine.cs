@@ -35,7 +35,7 @@ using AquelaFrameWork.Core.Asset;
 
 namespace AquelaFrameWork.Core
 {
-    class AFEngine : ASingleton<AFEngine>
+    public class AFEngine : ASingleton<AFEngine>
     {
         public static readonly string VERSION = "0.0.7";
         public static readonly string FRAME_RATE = "60";

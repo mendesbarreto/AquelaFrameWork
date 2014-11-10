@@ -110,7 +110,6 @@ namespace AquelaFrameWork.Core.Asset
             {
                 UnityEngine.Debug.LogWarning("Object could not be null");
             }
-
         }
 
         public void Add(string name, AFSound sound)

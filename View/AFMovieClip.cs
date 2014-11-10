@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 
 using UnityEngine;
+
 using AquelaFrameWork.Core;
 using AquelaFrameWork.Sound;
+
 using Signals;
 
 namespace AquelaFrameWork.View
