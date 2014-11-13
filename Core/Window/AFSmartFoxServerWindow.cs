@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Diagnostics;
 using System.IO;
  
@@ -53,3 +54,5 @@ namespace AquelaFrameWork.Core.Window
 
     }
 }
+
+#endif // UNITY_EDITOR

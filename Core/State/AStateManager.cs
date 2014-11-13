@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 
 using AquelaFrameWork.Core;
+using AquelaFrameWork.Core.Factory;
 
 namespace AquelaFrameWork.Core.State
 {
-    public class AStateManager
+    public abstract class AStateManager
     {
         ///////////////////////
         // PROPERTIES
@@ -15,21 +16,34 @@ namespace AquelaFrameWork.Core.State
 
         protected AFEngine m_engine;
 
+        protected AState.EGameState currentStateID = AState.EGameState.NULL_ID;
         protected IState m_currentState;
         protected IState m_nextState;
 
+        protected IStateFactory m_factory;
+
+        public AStateManager( IStateFactory factory )
+        {
+            //TODO: Verify if factory is null case yes throw some error
+            m_factory = factory;
+            m_engine = AFEngine.Instance;
+        }
 
         ///////////////////////
         // METHODS
         ///////////////////////
+        virtual public void Initialize()
+        {
+            
+        }
 
-        virtual public void Update( double deltaTime )
+        virtual public void AFUpdate(double deltaTime)
         {
             if( m_nextState != null )
                 ChangeState();
-            
-            if(m_currentState != null)
-                m_currentState.Update(deltaTime);
+
+            if (m_currentState != null && !currentStateID.Equals(AState.EGameState.NULL_ID) )
+                m_currentState.AFUpdate(deltaTime);
         }
 
         private void ChangeState()
@@ -47,14 +61,22 @@ namespace AquelaFrameWork.Core.State
             m_currentState.Initialize();
         }
 
+        virtual public void GotoState( AState.EGameState newStateID )
+        {
+            GotoState( m_factory.CreateStateByID(newStateID) );
+        }
+
         virtual public void GotoState( IState newState )
         {
-            if (newState == null || newState.GetID() == m_currentState.GetID())
+            if (newState == null || newState.GetStateID() == currentStateID)
                 return;
 
+            currentStateID = newState.GetStateID();
             m_nextState = newState;
         }
 
+        virtual public void Pause() { m_currentState.Pause(); }
+        virtual public void Resume() { m_currentState.Resume(); }
 
     }
 }

@@ -9,5 +9,10 @@ namespace AquelaFrameWork.Input
 {
     public class AFInput : ASingleton<AFInput>
     {
+        
+
     }
+
+
+
 }

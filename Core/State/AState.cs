@@ -15,25 +15,25 @@ using Signals;
 namespace AquelaFrameWork.Core.State
 {
     public abstract class AState : AFObject , IState
-    {
-        
+    {        
         readonly public static uint STATE_UPDATE = 0x1;
         readonly public static uint STATE_NOT_DESTROYABLE = 0x2;
-//         readonly public static uint STATE_SOUND_SUPORT = 0x4;
-//         readonly public static uint STATE_ASSET_SUPORT = 0x8;
-//         readonly public static uint STATE_INPUT_SUPORT = 0x16;
         readonly public static uint STATE_EVENTS_SUPORT = 0x4;
 
         readonly public static uint STATE_EVERYTHING = STATE_EVENTS_SUPORT | STATE_NOT_DESTROYABLE | STATE_UPDATE;
 
-        enum EGameState
+        public enum EGameState
         {
-            STATE_MENU = 0,
-            STATE_INTRO,
-            STATE_TUTORIAL,
-            STATE_RANKING,
-            STATE_GAME,
+            NULL_ID = 0,
+            MENU_ID,
+            INTRO_ID,
+            TUTORIAL_ID,
+            RANKING_ID,
+            GAME_ID,
+            STATE_COUNT
         }
+
+        protected EGameState m_stateID = EGameState.NULL_ID;
 
         protected object m_stateManger;
         protected AFSoundManager m_soundManager;
@@ -50,12 +50,14 @@ namespace AquelaFrameWork.Core.State
         public Signal<AFObject> OnObjectAdded = new Signal<AFObject>();
         public Signal<AFObject> OnObjectRemoved = new Signal<AFObject>();
 
+        [SerializeField]
         protected bool m_destroyable;
+        [SerializeField]
         protected bool m_update;
+        [SerializeField]
         protected bool m_hasEvents;
+        [SerializeField]
         protected bool m_initialized;
-
-        private uint ID = 0;
 
         public AState(uint flags)
         {
@@ -121,9 +123,30 @@ namespace AquelaFrameWork.Core.State
         }
 
 
-        virtual public void Update( double deltaTime )
+        virtual public void AFUpdate(double deltaTime)
         {
 
+        }
+
+        virtual public string GetName()
+        {
+            return gameObject.name;
+        }
+
+
+        public EGameState GetStateID()
+        {
+            return m_stateID;
+        }
+
+        public void SetStateID(EGameState value)
+        {
+            m_stateID = value;
+        }
+
+        public int GetID()
+        {
+            return GetInstanceID();
         }
 
         virtual public void Pause()

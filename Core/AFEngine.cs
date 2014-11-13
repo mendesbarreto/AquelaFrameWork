@@ -32,15 +32,18 @@ using AquelaFrameWork.Sound;
 using UnityEngine;
 
 using AquelaFrameWork.Core.Asset;
+using AquelaFrameWork.Core.State;
 
 namespace AquelaFrameWork.Core
 {
-    public class AFEngine : ASingleton<AFEngine>
+    public class AFEngine : ASingleton<AFEngine> 
     {
-        public static readonly string VERSION = "0.0.7";
+        [SerializeField]
+        public static readonly string VERSION = "0.0.10";
+        [SerializeField]
         public static readonly string FRAME_RATE = "60";
-
-        protected bool m_running = false;
+        [SerializeField]
+        private bool m_running = false;
         
         protected double m_startTime = 0;
         protected double m_time = 0;
@@ -52,44 +55,57 @@ namespace AquelaFrameWork.Core
         public Signal<bool> OnApplicationExit = new Signal<bool>();
         public Signal<bool> OnApplicationEnable = new Signal<bool>();
         public Signal<NullSignal> OnApplicationDestroy = new Signal<NullSignal>();
-        
-        private AFInput m_input;
-        private AFSoundManager m_soundManager;
 
-        void Awake()
+        protected AFInput m_input;
+        protected AFSoundManager m_soundManager;
+        protected AStateManager m_stateManager;
+
+        public AFEngine()
         {
             
         }
 
-        public void ConsoleGetCommand( String name, String paramName )
+        void Awake()
+        {
+            Initialize();
+        }
+
+        virtual public void ConsoleGetCommand( String name, String paramName )
         {
             //TODO: I have a dream.... Console command working for little test on the AF.
         }
 
-        public void ConsoleSetCommand( String name, String paramName, String value)
+        virtual public void ConsoleSetCommand( String name, String paramName, String value)
         {
             //TODO: I have a dream.... Console command working for little test on the AF.
         }
 
-        public void Destroy()
+        virtual public void Destroy()
         {
             //TODO: Make the Engine destroy here
         }
 
-        public void Pause()
+        virtual public void Initialize()
+        {
+            SetRunning( true );
+        }
+
+        virtual public void Pause()
         {
             if(m_running)
             {
-                m_running = false;
+                SetRunning( false );
+                m_stateManager.Pause();
                 OnPause.Dispatch(m_running);
             }
         }
 
-        public void UnPause()
+        virtual public void UnPause()
         {
             if (!m_running)
             {
-                m_running = true;
+                SetRunning( true );
+                m_stateManager.Resume();
                 OnPause.Dispatch(m_running);
             }
         }
@@ -125,8 +141,14 @@ namespace AquelaFrameWork.Core
             OnPause.Dispatch(pauseStatus);
         }
 
-        public void Update()
+        virtual public void Update()
         {
+            if( m_running )
+            {
+                double deltaTime = UnityEngine.Time.smoothDeltaTime;
+                //m_input.Update(deltaTime);
+                m_stateManager.AFUpdate(deltaTime);
+            }
             //Debug.Log("New Resolution: " + AFAssetManager.GetPathTargetPlatformWithResolution());
         }
 

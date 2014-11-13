@@ -7,16 +7,18 @@ using AquelaFrameWork.Core;
 
 namespace AquelaFrameWork.Core.State
 {
-    interface IState
+    public interface IState
     {
         void Initialize();
         void Destroy();
         void Pause();
         void Resume();
-        void Update(double deltaTime);
+        void AFUpdate(double deltaTime);
 
         string GetName();
-        uint GetID();
+        AState.EGameState GetStateID();
+
+        int GetID();
 
 
         bool IsDestroyable();
