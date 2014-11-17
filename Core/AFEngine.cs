@@ -43,7 +43,7 @@ namespace AquelaFrameWork.Core
         [SerializeField]
         public static readonly string FRAME_RATE = "60";
         [SerializeField]
-        private bool m_running = false;
+        private bool m_running = true;
         
         protected double m_startTime = 0;
         protected double m_time = 0;
@@ -60,13 +60,10 @@ namespace AquelaFrameWork.Core
         protected AFSoundManager m_soundManager;
         protected AStateManager m_stateManager;
 
-        public AFEngine()
+        protected void Awake()
         {
-            
-        }
-
-        void Awake()
-        {
+            m_instance = this;
+            SetRunning(false);
             Initialize();
         }
 
@@ -135,13 +132,8 @@ namespace AquelaFrameWork.Core
         {
             return m_input;
         }
-        void OnApplicationPause(bool pauseStatus)
-        {
-            m_running = pauseStatus;
-            OnPause.Dispatch(pauseStatus);
-        }
 
-        virtual public void Update()
+        virtual protected void Update()
         {
             if( m_running )
             {
@@ -186,6 +178,12 @@ namespace AquelaFrameWork.Core
         {
             OnApplicationExit.Dispatch(true);
         }
+
+//         void OnApplicationPause(bool pauseStatus)
+//         {
+//             SetRunning(pauseStatus);
+//             OnPause.Dispatch(pauseStatus);
+//         }
 
         // This function is called when the MonoBehaviour will be destroyed (Since v3.2)
         void OnDestroy()

@@ -4,20 +4,12 @@ using System.Linq;
 using System.Text;
 
 using AquelaFrameWork.Core.Factory;
+using Assets.Scripts;
 
 namespace AquelaFrameWork.Core.State
 {
     public class AFStateManager : AStateManager
     {
-        public AFStateManager( IStateFactory factory ) : 
-            base(factory)
-        {
-            Initialize();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
+        
     }
 }

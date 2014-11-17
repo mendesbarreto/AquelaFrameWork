@@ -59,8 +59,10 @@
     <Compile Include="Core\AqueleFrameWork.cs" />
     <Compile Include="Core\AFEngine.cs" />
     <Compile Include="Core\Entity.cs" />
+    <Compile Include="Core\Factory\IStateFactory.cs" />
     <Compile Include="Core\Factory\StateFactory.cs" />
     <Compile Include="Core\IDisposeble.cs" />
+    <Compile Include="Core\State\AFStateManager.cs" />
     <Compile Include="Core\State\AState.cs" />
     <Compile Include="Core\State\AStateManager.cs" />
     <Compile Include="Core\State\IState.cs" />

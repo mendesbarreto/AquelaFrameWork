@@ -10,6 +10,9 @@ namespace AquelaFrameWork.Core.State
     public interface IState
     {
         void Initialize();
+
+        void BuildState();
+
         void Destroy();
         void Pause();
         void Resume();

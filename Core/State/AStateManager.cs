@@ -8,7 +8,7 @@ using AquelaFrameWork.Core.Factory;
 
 namespace AquelaFrameWork.Core.State
 {
-    public abstract class AStateManager
+    public abstract class AStateManager : AFObject
     {
         ///////////////////////
         // PROPERTIES
@@ -22,19 +22,16 @@ namespace AquelaFrameWork.Core.State
 
         protected IStateFactory m_factory;
 
-        public AStateManager( IStateFactory factory )
+        virtual protected void Awake()
+        {
+
+        }
+
+        virtual public void Initialize( IStateFactory factory )
         {
             //TODO: Verify if factory is null case yes throw some error
             m_factory = factory;
             m_engine = AFEngine.Instance;
-        }
-
-        ///////////////////////
-        // METHODS
-        ///////////////////////
-        virtual public void Initialize()
-        {
-            
         }
 
         virtual public void AFUpdate(double deltaTime)
@@ -48,17 +45,22 @@ namespace AquelaFrameWork.Core.State
 
         private void ChangeState()
         {
-            if( m_currentState.IsDestroyable() )
+            if (!currentStateID.Equals(AState.EGameState.NULL_ID))
             {
-                m_currentState.Destroy();
-            }
-            else
-            {
-                m_currentState.Pause();
+                if (m_currentState.IsDestroyable())
+                {
+                    m_currentState.Destroy();
+                }
+                else
+                {
+                    m_currentState.Pause();
+                }
             }
 
+            currentStateID = m_nextState.GetStateID();
             m_currentState = m_nextState;
             m_currentState.Initialize();
+            m_nextState = null;
         }
 
         virtual public void GotoState( AState.EGameState newStateID )
@@ -71,7 +73,6 @@ namespace AquelaFrameWork.Core.State
             if (newState == null || newState.GetStateID() == currentStateID)
                 return;
 
-            currentStateID = newState.GetStateID();
             m_nextState = newState;
         }
 

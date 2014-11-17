@@ -6,7 +6,7 @@ namespace AquelaFrameWork.Core
 {
     public abstract class ASingleton<T> : AFObject where T : MonoBehaviour
     {
-        protected static T instance;
+        protected static T m_instance;
 
         protected ASingleton()
         {
@@ -16,12 +16,12 @@ namespace AquelaFrameWork.Core
         {
             get
             {
-                if (instance == null)
+                if (m_instance == null)
                 {
-                    instance = AFObject.Create<T>();
-                    GameObject.DontDestroyOnLoad( instance );
+                    m_instance = AFObject.Create<T>();
+                    GameObject.DontDestroyOnLoad(m_instance);
                 }
-                return instance;
+                return m_instance;
             }
         }
 

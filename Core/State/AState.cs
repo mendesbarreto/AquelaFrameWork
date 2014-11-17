@@ -59,7 +59,12 @@ namespace AquelaFrameWork.Core.State
         [SerializeField]
         protected bool m_initialized;
 
-        public AState(uint flags)
+        virtual protected void Awake()
+        {
+            Initialize();
+        }
+
+        virtual public void Initialize(uint flags)
         {
             if ((flags & STATE_UPDATE) == STATE_UPDATE)
             {
@@ -87,6 +92,8 @@ namespace AquelaFrameWork.Core.State
             {
                 m_destroyable = true;
             }
+
+            Initialize();
         }
 
 
@@ -95,7 +102,7 @@ namespace AquelaFrameWork.Core.State
             if (m_hasEvents)
                 OnStart.Dispatch();
 
-            if (m_initialized)
+            if (!m_initialized)
             { 
                 m_engine = AFEngine.Instance;
                 m_soundManager = AFSoundManager.Instance;
@@ -105,11 +112,20 @@ namespace AquelaFrameWork.Core.State
 
                 if (m_hasEvents)
                     OnInitialized.Dispatch();
+
+
+                BuildState();
+                m_initialized = true;
             }
             else
             {
                 Resume();
             }
+        }
+
+        virtual public void BuildState()
+        {
+ 
         }
 
         public bool IsDestroyable()
