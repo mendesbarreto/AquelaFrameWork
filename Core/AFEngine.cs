@@ -26,21 +26,24 @@ using System;
 using System.Collections.Generic;
 
 using Signals;
-using AFFrameWork.Input;
-using AFFrameWork.Sound;
 
+using AquelaFrameWork.Input;
+using AquelaFrameWork.Sound;
 using UnityEngine;
 
-using AFFrameWork.Core.Asset;
+using AquelaFrameWork.Core.Asset;
+using AquelaFrameWork.Core.State;
 
-namespace AFFrameWork.Core
+namespace AquelaFrameWork.Core
 {
-    class AFEngine : ASingleton<AFEngine>
+    public class AFEngine : ASingleton<AFEngine> 
     {
-        public static readonly string VERSION = "0.0.7";
+        [SerializeField]
+        public static readonly string VERSION = "0.0.10";
+        [SerializeField]
         public static readonly string FRAME_RATE = "60";
-
-        protected bool m_running = false;
+        [SerializeField]
+        private bool m_running = true;
         
         protected double m_startTime = 0;
         protected double m_time = 0;
@@ -51,45 +54,61 @@ namespace AFFrameWork.Core
         public Signal<bool> OnApplicationFocusChange = new Signal<bool>();
         public Signal<bool> OnApplicationExit = new Signal<bool>();
         public Signal<bool> OnApplicationEnable = new Signal<bool>();
-        public Signal<NullSignal> OnApplicationDestroy = new Signal<NullSignal>();
-        
-        private AFInput m_input;
-        private AFSoundManager m_soundManager;
+        public Signal<empty> OnApplicationDestroy = new Signal<empty>();
 
-        void Awake()
+        protected AFInput m_input;
+        protected AFSoundManager m_soundManager;
+        protected AStateManager m_stateManager;
+
+        public AStateManager GetStateManger()
         {
-            
+            return m_stateManager;
         }
 
-        public void ConsoleGetCommand( String name, String paramName )
+
+        protected void Awake()
+        {
+            m_instance = this;
+            SetRunning(false);
+            Initialize();
+        }
+
+        virtual public void ConsoleGetCommand( String name, String paramName )
         {
             //TODO: I have a dream.... Console command working for little test on the AF.
         }
 
-        public void ConsoleSetCommand( String name, String paramName, String value)
+        virtual public void ConsoleSetCommand( String name, String paramName, String value)
         {
             //TODO: I have a dream.... Console command working for little test on the AF.
         }
 
-        public void Destroy()
+        virtual public void Destroy()
         {
             //TODO: Make the Engine destroy here
         }
 
-        public void Pause()
+        virtual public void Initialize()
+        {
+            SetRunning( true );
+        }
+
+        virtual public void Pause()
         {
             if(m_running)
             {
-                m_running = false;
+                SetRunning( false );
+                m_stateManager.Pause();
                 OnPause.Dispatch(m_running);
             }
         }
 
-        public void UnPause()
+        virtual public void UnPause()
         {
             if (!m_running)
             {
-                m_running = true;
+                SetRunning( true );
+                m_stateManager.Resume();
                 OnPause.Dispatch(m_running);
             }
         }
@@ -119,14 +138,15 @@ namespace AFFrameWork.Core
         {
             return m_input;
         }
-        void OnApplicationPause(bool pauseStatus)
-        {
-            m_running = pauseStatus;
-            OnPause.Dispatch(pauseStatus);
-        }
 
-        public void Update()
+        virtual protected void Update()
         {
+            if( m_running )
+            {
+                double deltaTime = UnityEngine.Time.smoothDeltaTime;
+                //m_input.Update(deltaTime);
+                m_stateManager.AFUpdate(deltaTime);
+            }
             //Debug.Log("New Resolution: " + AFAssetManager.GetPathTargetPlatformWithResolution());
         }
 
@@ -164,6 +184,12 @@ namespace AFFrameWork.Core
         {
             OnApplicationExit.Dispatch(true);
         }
+
+//         void OnApplicationPause(bool pauseStatus)
+//         {
+//             SetRunning(pauseStatus);
+//             OnPause.Dispatch(pauseStatus);
+//         }
 
         // This function is called when the MonoBehaviour will be destroyed (Since v3.2)
         void OnDestroy()

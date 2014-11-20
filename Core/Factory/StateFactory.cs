@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AFFrameWork.Core
+namespace Assets.Scripts.AquelaFrameWork.Core.Factory
 {
-    class AState
+    public class StateFactory
     {
     }
 }

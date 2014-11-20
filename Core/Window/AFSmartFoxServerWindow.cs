@@ -1,11 +1,12 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Diagnostics;
 using System.IO;
  
 using UnityEngine;
 using UnityEditor;
 
-namespace AFFrameWork.Core.Window
+namespace AquelaFrameWork.Core.Window
 {
     public class AFSmartFoxServerWindow : EditorWindow
     {
@@ -53,3 +54,5 @@ namespace AFFrameWork.Core.Window
 
     }
 }
+
+#endif // UNITY_EDITOR

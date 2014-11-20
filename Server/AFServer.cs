@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-using AFFrameWork.Core;
+
+using AquelaFrameWork.Core;
+using AquelaFrameWork.Utils;
 
 //Smarfox Packages
 using Sfs2X;
@@ -9,7 +11,7 @@ using Sfs2X.Core;
 
 using Signals;
 
-namespace AFFrameWork.Server
+namespace AquelaFrameWork.Server
 {
     public class AFServer : ASingleton<AFServer>
     {
@@ -50,6 +52,7 @@ namespace AFFrameWork.Server
 
             sfs.AddEventListener(SFSEvent.LOGIN, OnLogin);
             sfs.AddEventListener(SFSEvent.LOGIN, OnLogout);
+            sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
 
             sfs.AddLogListener(logLevel, OnDebugLogMessage);
         }
@@ -62,8 +65,15 @@ namespace AFFrameWork.Server
                 onLogin = null;
             }
 
+            UnityEngine.Debug.Log("LOGIN SUCCESSFUL!!!!!!!!!!!!!!!!");
             UnityEngine.Debug.Log( (string)evt.Params["message"] );
         }
+
+        public void OnLoginError( BaseEvent evt )
+        {
+            UnityEngine.Debug.LogError("Login failure: " + (string)evt.Params["errorMessage"]);
+        }
+
 
         public void OnLogout(BaseEvent evt)
         {
@@ -138,9 +148,11 @@ namespace AFFrameWork.Server
 
         }
 
-        public void Login( string userName , string password, string zone = "Matheus" )
+        public void Login( string userName , string password, string zone = "sitio" )
         {
-            sfs.Send(new Sfs2X.Requests.LoginRequest(userName, password, zone));
+            Sfs2X.Entities.Data.SFSObject sfsobj = new Sfs2X.Entities.Data.SFSObject();
+            sfsobj.PutUtfString("password", password);
+            sfs.Send(new Sfs2X.Requests.LoginRequest(userName, password, zone, sfsobj));
         }
 
 

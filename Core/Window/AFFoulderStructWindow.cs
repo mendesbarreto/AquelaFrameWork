@@ -1,13 +1,15 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Diagnostics;
 using System.IO;
 
 using UnityEditor;
 using UnityEngine;
 
-using AFFrameWork.Core.Asset;
+using AquelaFrameWork.Core.Asset;
 
-namespace AFFrameWork.Core.Window
+namespace AquelaFrameWork.Core.Window
 {
     public class AFFoulderStructWindow : EditorWindow
     {
@@ -91,3 +93,4 @@ namespace AFFrameWork.Core.Window
         }
     }
 }
+#endif // UNITY_EDITOR

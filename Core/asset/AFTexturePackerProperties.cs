@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using AFFrameWork.Utils;
+using AquelaFrameWork.Utils;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
     public class AFTexturePackerProperties
     {

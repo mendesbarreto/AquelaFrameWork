@@ -4,7 +4,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
     internal class AFTextureInfo
     {

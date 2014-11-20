@@ -55,11 +55,17 @@
     <Compile Include="Core\asset\AFTextureAtlas.cs" />
     <Compile Include="Core\asset\AFTextureInfo.cs" />
     <Compile Include="Core\asset\AFTexturePackerProperties.cs" />
-    <Compile Include="Core\AState.cs" />
     <Compile Include="Core\asset\AFAssetManager.cs" />
     <Compile Include="Core\AqueleFrameWork.cs" />
     <Compile Include="Core\AFEngine.cs" />
+    <Compile Include="Core\Entity.cs" />
+    <Compile Include="Core\Factory\IStateFactory.cs" />
+    <Compile Include="Core\Factory\StateFactory.cs" />
     <Compile Include="Core\IDisposeble.cs" />
+    <Compile Include="Core\State\AFStateManager.cs" />
+    <Compile Include="Core\State\AState.cs" />
+    <Compile Include="Core\State\AStateManager.cs" />
+    <Compile Include="Core\State\IState.cs" />
     <Compile Include="Core\Window\AFFoulderStructWindow.cs" />
     <Compile Include="Core\Window\AFSmartFoxServerWindow.cs" />
     <Compile Include="Input\AFInput.cs" />
@@ -75,6 +81,7 @@
     <Compile Include="Sound\AFSoundGroup.cs" />
     <Compile Include="Sound\AFSoundSequence.cs" />
     <Compile Include="Utils\AFCSVHelper.cs" />
+    <Compile Include="Utils\CryptoUtil.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="View\AFMovieClip.cs" />
     <Compile Include="View\AFSprite.cs" />

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-using AFFrameWork.Sound;
+using AquelaFrameWork.Sound;
 
-namespace AFFrameWork.Core.Asset
+namespace AquelaFrameWork.Core.Asset
 {
 
     public class AFAssetManager : ASingleton<AFAssetManager>
@@ -27,23 +27,46 @@ namespace AFFrameWork.Core.Asset
         public static readonly string DIRECTORY_NAME_RESOURCES= "Resources";
 
         protected Dictionary<string, Texture> m_textures = new Dictionary<string,Texture>();
+        protected Dictionary<string, AFTextureAtlas> m_texturesAtlas = new Dictionary<string, AFTextureAtlas>();
         protected Dictionary<string , AFSound> m_sounds = new Dictionary<string,AFSound>();
         protected Dictionary<string , GameObject> m_prefabs = new Dictionary<string,GameObject>();
         protected Dictionary<string , object> m_custom = new Dictionary<string,object>();
 
         protected Dictionary<string, AFPool> m_pool = new Dictionary<string, AFPool>();
+        void Awake()
+        {
+            gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
+        }
 
-        public void Load<T>( string name , string path ) where T : UnityEngine.Object
+        public T Load<T>(string path) where T : UnityEngine.Object
+        {
+            return Load<T>(path, path);
+        }
+
+        public T Load<T>(string name, string path) where T : UnityEngine.Object
         {
             T res = null;
 
             try
             {
-                res = Resources.Load<T>(path);
+                res = GetAsset<T>(name);
 
-                UnityEngine.Debug.Log("I'll store an object of: " + typeof(T).ToString());
+                if (res == null)
+                {
 
-                Add( name, res );
+                    if (typeof(T) == typeof(AFTextureAtlas))
+                    {
+                        res = new AFTextureAtlas("sprites", path, AFTextureAtlas.EFileType.kTextTypes_Csv) as T;
+                    }
+                    else
+                    {
+                        res = Resources.Load<T>(path);
+                    }
+
+                    UnityEngine.Debug.Log("I'll store an object of: " + typeof(T).ToString());
+
+                    Add(name, res);
+                }
             }
             catch( NullReferenceException nullEx )
             {
@@ -54,17 +77,19 @@ namespace AFFrameWork.Core.Asset
                 //TODO: Discover what happens when unity throw this error
                 UnityEngine.Debug.LogError("The asset was not found: " + ex.Message);
             }
+
+            return res;
         }
 
 
-        public AFPool CreatePool( string name , string assetName , uint qtd , uint maxPoolObjects = 0)
+        public AFPool CreatePool<T>( string name , string assetName , uint qtd , uint maxPoolObjects = 0) where T : UnityEngine.Object
         {
             AFPool pool = null;
 
             if( qtd > 1 )
             {
 
-                object obj = GetAsset(assetName);
+                T obj = GetAsset<T>(assetName);
 
                 if ( obj != null )
                 {
@@ -99,8 +124,8 @@ namespace AFFrameWork.Core.Asset
 
             return pool;
         }
-        
-        public void Add( string name , object obj )
+
+        public object Add(string name, object obj)
         {
             if( obj != null )
             {
@@ -111,9 +136,10 @@ namespace AFFrameWork.Core.Asset
                 UnityEngine.Debug.LogWarning("Object could not be null");
             }
 
+            return obj;
         }
 
-        public void Add(string name, AFSound sound)
+        public AFSound Add(string name, AFSound sound)
         {
             if ( sound != null)
             {
@@ -123,9 +149,11 @@ namespace AFFrameWork.Core.Asset
             {
                 UnityEngine.Debug.LogWarning("AFSound could not be null");
             }
+
+            return sound;
         }
 
-        public void Add(string name, GameObject gameObject)
+        public GameObject Add(string name, GameObject gameObject)
         {
             if ( gameObject != null)
             {
@@ -135,9 +163,25 @@ namespace AFFrameWork.Core.Asset
             {
                 UnityEngine.Debug.LogWarning("GameObject could not be null");
             }
+
+            return gameObject;
         }
 
-        public void Add(string name, Texture texture)
+        public AFTextureAtlas Add(string name, AFTextureAtlas textureAtlas)
+        {
+            if (textureAtlas != null)
+            {
+                m_texturesAtlas.Add(name, textureAtlas);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("AFTextureAtlas could not be null");
+            }
+
+            return textureAtlas;
+        }
+
+        public Texture Add(string name, Texture texture)
         {
             if (texture != null)
             {
@@ -147,6 +191,8 @@ namespace AFFrameWork.Core.Asset
             {
                 UnityEngine.Debug.LogWarning("Texture could not be null");
             }
+
+            return texture;
         }
 
         public Texture GetTexture( string name )
@@ -224,25 +270,25 @@ namespace AFFrameWork.Core.Asset
             return false;
         }
 
-        private object GetAsset(string name)
+        private T GetAsset<T>(string name) where T : UnityEngine.Object
         {
-            object obj = null;
+            T obj = null;
 
             if (m_textures.ContainsKey(name))
             {
-                obj = m_textures[name];
+                obj = m_textures[name] as T;
             }
             if(m_sounds.ContainsKey(name) )
             {
-                obj = m_sounds[name];
+                obj = m_sounds[name] as T;
             }
             if(m_prefabs.ContainsKey(name))
             {
-                obj = m_prefabs[name];
+                obj = m_prefabs[name] as T;
             }
             if (m_custom.ContainsKey(name))
             {
-                obj = m_custom[name];
+                obj = m_custom[name] as T;
             }
 
             return obj;

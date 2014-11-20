@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace AFFrameWork.Server
+namespace AquelaFrameWork.Server
 {
     namespace AES
     {

@@ -1,10 +1,14 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Collections.Generic;
+
 using UnityEditor;
 using UnityEngine;
-using AFFrameWork.Core.Window;
 
-namespace AFFrameWork.Core
+using AquelaFrameWork.Core.Window;
+
+namespace AquelaFrameWork.Core
 {
     public class AquelaFrameWork : Editor
     {
@@ -22,3 +26,5 @@ namespace AFFrameWork.Core
         }
     }
 }
+
+#endif

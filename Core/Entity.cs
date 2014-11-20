@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AquelaFrameWork.Input
+namespace AquelaFrameWork.Core
 {
-    class AFInputController
+    public class Entity
     {
     }
 }

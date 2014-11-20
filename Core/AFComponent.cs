@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace AFFrameWork.Core
+namespace AquelaFrameWork.Core
 {
     public class AFComponent : AFObject
     {
-
+       
     }
 }

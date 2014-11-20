@@ -4,15 +4,18 @@
 //
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-using UnityEngine;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using AFFrameWork.Core;
+using UnityEngine;
+
+using AquelaFrameWork.Core;
+
 using Signals;
 
-namespace AFFrameWork.Sound
+namespace AquelaFrameWork.Sound
 {
     public class AFSoundManager : ASingleton<AFSoundManager>
     {
@@ -28,6 +31,12 @@ namespace AFFrameWork.Sound
 
         public int audiosInList = 0;
         protected bool m_mute = false;
+
+
+        void Awake()
+        {
+            gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
+        }
 
         public AFSound Add( string name )
         {

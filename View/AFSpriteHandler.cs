@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 
 using UnityEngine;
-using AFFrameWork.Core;
+using AquelaFrameWork.Core;
 
-namespace AFFrameWork.View
+namespace AquelaFrameWork.View
 {
     public class AFSpriteHandler : AFObject
     {

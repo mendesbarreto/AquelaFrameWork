@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AFFrameWork.Utils
+namespace AquelaFrameWork.Utils
 {
     public class Utility
     {
