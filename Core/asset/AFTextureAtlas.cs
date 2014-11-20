@@ -14,7 +14,7 @@ using AquelaFrameWork.Utils;
 
 namespace AquelaFrameWork.Core.Asset
 {
-    public class AFTextureAtlas
+    public class AFTextureAtlas : UnityEngine.Object
     {
         public enum EFileType
         {
@@ -172,11 +172,11 @@ namespace AquelaFrameWork.Core.Asset
                 rect = new UnityEngine.Rect(x, y, w, h);
                 pivot = new UnityEngine.Vector2(px, py);
 
-                UnityEngine.Debug.Log("---------------------");
-                UnityEngine.Debug.Log("Name: " + name);
-                UnityEngine.Debug.Log("Rect: " + rect);
-                UnityEngine.Debug.Log("Pivot: " + pivot);
-                UnityEngine.Debug.Log("---------------------");
+//                 UnityEngine.Debug.Log("---------------------");
+//                 UnityEngine.Debug.Log("Name: " + name);
+//                 UnityEngine.Debug.Log("Rect: " + rect);
+//                 UnityEngine.Debug.Log("Pivot: " + pivot);
+//                 UnityEngine.Debug.Log("---------------------");
 
                 info.SetName(name);
                 info.SetFrame(rect);

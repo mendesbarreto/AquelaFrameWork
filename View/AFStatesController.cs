@@ -11,14 +11,26 @@ namespace AquelaFrameWork.View
 {
     public class AFStatesController : AFObject , IAnimatable
     {
+
+#if UNITY_EDITOR
+        [SerializeField]
+        protected string currentStateName = "";
+#endif //UNITY_EDITOR
+
+        [SerializeField]
         protected int m_defaultStateID = 0;
+        [SerializeField]
         protected int m_currentStateID = 0;
+
+        [SerializeField]
         protected int m_lastStateID = 0;
+        [SerializeField]
         protected int m_nextStateID = 0;
 
         protected AFMovieClip m_currentState;
-
+        [SerializeField]
         protected Dictionary<int, AFMovieClip> m_states;
+        [SerializeField]
         protected bool m_update = true;
 
         public AFMovieClip GetState(string name) { return GetState(name.GetHashCode()); }
@@ -64,7 +76,24 @@ namespace AquelaFrameWork.View
             m_currentState = state;
             m_currentStateID = name;
             m_states.Add(name, state);
+
+#if UNITY_EDITOR
+            SetNameOfCurrentState();
+#endif //UNITY_EDITOR
+
         }
+
+//This is for help with inpector in Unity3d Editor only
+#if UNITY_EDITOR
+        public void SetNameOfCurrentState()
+        {
+            
+                string L_name = m_currentState.name;
+                L_name = L_name.Substring(34);
+                currentStateName = L_name;
+           
+        }
+#endif //UNITY_EDITOR
 
         public void AdvanceTime(double time)
         {
@@ -80,6 +109,9 @@ namespace AquelaFrameWork.View
                 m_currentState = m_states[m_nextStateID];
                 m_currentState.Play();
                 m_currentState.gameObject.SetActive(true);
+#if UNITY_EDITOR
+                SetNameOfCurrentState();
+#endif //UNITY_EDITOR
 
                 m_nextStateID = 0;
             }

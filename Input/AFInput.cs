@@ -9,10 +9,9 @@ namespace AquelaFrameWork.Input
 {
     public class AFInput : ASingleton<AFInput>
     {
-        
-
+        void Awake()
+        {
+            gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
+        }
     }
-
-
-
 }

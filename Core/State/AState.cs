@@ -20,31 +20,34 @@ namespace AquelaFrameWork.Core.State
         readonly public static uint STATE_NOT_DESTROYABLE = 0x2;
         readonly public static uint STATE_EVENTS_SUPORT = 0x4;
 
-        readonly public static uint STATE_EVERYTHING = STATE_EVENTS_SUPORT | STATE_NOT_DESTROYABLE | STATE_UPDATE;
+        readonly public static uint STATE_EVERYTHING = STATE_EVENTS_SUPORT | STATE_UPDATE;
 
         public enum EGameState
         {
-            NULL_ID = 0,
-            MENU_ID,
-            INTRO_ID,
-            TUTORIAL_ID,
-            RANKING_ID,
-            GAME_ID,
+            NULL = 0,
+            MENU,
+            INTRO,
+            TUTORIAL,
+            RANKING,
+            GAME,
             STATE_COUNT
         }
 
-        protected EGameState m_stateID = EGameState.NULL_ID;
+        [SerializeField]
+        protected EGameState m_stateID = EGameState.NULL;
 
         protected object m_stateManger;
         protected AFSoundManager m_soundManager;
         protected AFAssetManager m_assetManager;
         protected AFInput m_input;
         protected AFEngine m_engine;
+
+        [SerializeField]
         protected List<AFObject> m_objects;
 
-        public Signal<NullSignal> OnStart = new Signal<NullSignal>();
-        public Signal<NullSignal> OnDestroy = new Signal<NullSignal>();
-        public Signal<NullSignal> OnInitialized = new Signal<NullSignal>();
+        public Signal<empty> OnStart = new Signal<empty>();
+        public Signal<empty> OnDestroy = new Signal<empty>();
+        public Signal<empty> OnInitialized = new Signal<empty>();
 
         public Signal<bool> OnPause = new Signal<bool>();
         public Signal<AFObject> OnObjectAdded = new Signal<AFObject>();
@@ -112,8 +115,6 @@ namespace AquelaFrameWork.Core.State
 
                 if (m_hasEvents)
                     OnInitialized.Dispatch();
-
-
                 BuildState();
                 m_initialized = true;
             }
@@ -167,16 +168,14 @@ namespace AquelaFrameWork.Core.State
 
         virtual public void Pause()
         {
-            m_update = false;
-
+            m_engine.Pause();
             if (m_hasEvents)
                 OnPause.Dispatch(true);
         }
 
         virtual public void Resume()
         {
-            m_update = true;
-
+            m_engine.UnPause();
             if (m_hasEvents)
                 OnPause.Dispatch(false);
         }
@@ -190,6 +189,10 @@ namespace AquelaFrameWork.Core.State
                 m_input = null;
                 m_engine = null;
                 m_assetManager = null;
+
+                for (int i = 0; i < m_objects.Count; ++i)
+                    Destroy(m_objects[i].gameObject);
+
                 m_objects.Clear();
                 m_objects = null;
             }

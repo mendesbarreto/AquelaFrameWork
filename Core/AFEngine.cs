@@ -54,11 +54,17 @@ namespace AquelaFrameWork.Core
         public Signal<bool> OnApplicationFocusChange = new Signal<bool>();
         public Signal<bool> OnApplicationExit = new Signal<bool>();
         public Signal<bool> OnApplicationEnable = new Signal<bool>();
-        public Signal<NullSignal> OnApplicationDestroy = new Signal<NullSignal>();
+        public Signal<empty> OnApplicationDestroy = new Signal<empty>();
 
         protected AFInput m_input;
         protected AFSoundManager m_soundManager;
         protected AStateManager m_stateManager;
+
+        public AStateManager GetStateManger()
+        {
+            return m_stateManager;
+        }
+
 
         protected void Awake()
         {

@@ -10,6 +10,5 @@ namespace AquelaFrameWork.Core.State
 {
     public class AFStateManager : AStateManager
     {
-        
     }
 }
