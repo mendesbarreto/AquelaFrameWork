@@ -85,7 +85,37 @@ namespace AquelaFrameWork.Core
 
         virtual public void Destroy()
         {
-            //TODO: Make the Engine destroy here
+            m_startTime = 0;
+            m_time = 0;
+            m_deltaTime = 0;
+
+            OnPause.RemoveAll();
+            OnPause = null;
+
+            OnEngineReady.RemoveAll();
+            OnEngineReady = null;
+
+            OnApplicationFocusChange.RemoveAll();
+            OnApplicationFocusChange = null;
+
+            OnApplicationExit.RemoveAll();
+            OnApplicationExit = null;
+
+            OnApplicationEnable.RemoveAll();
+            OnApplicationEnable = null;
+
+            OnApplicationDestroy.RemoveAll();
+            OnApplicationDestroy = null;
+
+            m_input.AFDestroy();
+            m_input = null;
+
+            m_soundManager.AFDestroy();
+            m_soundManager = null;
+
+            m_stateManager.AFDestroy();
+            m_stateManager = null;
+
         }
 
         virtual public void Initialize()

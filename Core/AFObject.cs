@@ -18,5 +18,11 @@ namespace AquelaFrameWork.Core
 
             return new GameObject(typeof(T).ToString() + ": " + name).AddComponent<T>();
         }
+
+
+        public void AFDestroy()
+        {
+
+        }
     }
 }
