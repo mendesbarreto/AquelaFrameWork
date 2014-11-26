@@ -36,12 +36,52 @@ using AquelaFrameWork.Core.State;
 
 namespace AquelaFrameWork.Core
 {
+    /// <summary>
+    /// 
+    /// The Main Class of the Aquela Framework. Here is start point! That class controls
+    /// all the modules, input, sound manager, asset manager, application state and more. To get acess to it, 
+    /// you should Extend the AFEngine to begin you project. All things should start from Initialize() method.
+    /// <para>
+    /// To the AFEngine works properly you should build some attributes like a: 
+    /// <list type="bullet">
+    ///     <item> 
+    ///         <description><para><c>AFStateManager:</c> You should instanciate AFStateManager or build your own state manager extending the AStatemanager</para></description> 
+    ///     </item> 
+    /// 
+    ///     <item> 
+    ///         <description><para><c>IStateFactory:</c> You should build a state factory where all your states will be declared, and do not forget of implements IStateFacotry</para></description> 
+    ///     </item> 
+    /// 
+    /// </list> 
+    /// 
+    /// </para>
+    /// 
+    /// </summary>
+    
     public class AFEngine : ASingleton<AFEngine> 
     {
+        /// <summary>
+        /// <para> 
+        ///    The framework version
+        /// </para>
+        /// </summary>
         [SerializeField]
         public static readonly string VERSION = "0.0.10";
+
+        /// <summary>
+        /// <para> 
+        ///     Aquela Framework frame rate
+        /// </para>
+        /// </summary>
         [SerializeField]
         public static readonly string FRAME_RATE = "60";
+
+
+        /// <summary>
+        /// <para> 
+        ///     Show if the application is running or not
+        /// </para>
+        /// </summary>
         [SerializeField]
         private bool m_running = true;
         
@@ -49,17 +89,54 @@ namespace AquelaFrameWork.Core
         protected double m_time = 0;
         protected double m_deltaTime = 0;
 
+        /// <summary>
+        /// <para> 
+        ///     This signal is dispatched when the Unity3D pause the system. Normally when the application is minimized by OS
+        /// </para>
+        /// </summary>
         public Signal<bool> OnPause = new Signal<bool>();
+
+
+        /// <summary>
+        /// <para> 
+        ///     This signal is dispatched when the Unity3D pause the system. Normally when the application is minimized by OS
+        /// </para>
+        /// </summary>
         public Signal<bool> OnEngineReady = new Signal<bool>();
+
+        /// <summary>
+        /// <para> 
+        ///     Occurs when the player gets or loses focus.
+        /// </para>
+        /// </summary>
         public Signal<bool> OnApplicationFocusChange = new Signal<bool>();
+
+        /// <summary>
+        /// <para> 
+        ///     Signal sent before the application is quit
+        /// </para>
+        /// </summary>
         public Signal<bool> OnApplicationExit = new Signal<bool>();
-        public Signal<bool> OnApplicationEnable = new Signal<bool>();
+
+        /// <summary>
+        /// <para> 
+        ///     This signal is dispatched before the AFEngine call destroy
+        /// </para>
+        /// </summary>
         public Signal<empty> OnApplicationDestroy = new Signal<empty>();
 
         protected AFInput m_input;
+
         protected AFSoundManager m_soundManager;
+
         protected AStateManager m_stateManager;
 
+
+        /// <summary>
+        /// <para> 
+        ///     Return the current state manager
+        /// </para>
+        /// </summary>
         public AStateManager GetStateManger()
         {
             return m_stateManager;
@@ -83,6 +160,12 @@ namespace AquelaFrameWork.Core
             //TODO: I have a dream.... Console command working for little test on the AF.
         }
 
+
+        /// <summary>
+        /// <para> 
+        ///     This method destroys all states and yours objects
+        /// </para>
+        /// </summary>
         virtual public void Destroy()
         {
             m_startTime = 0;
@@ -101,9 +184,6 @@ namespace AquelaFrameWork.Core
             OnApplicationExit.RemoveAll();
             OnApplicationExit = null;
 
-            OnApplicationEnable.RemoveAll();
-            OnApplicationEnable = null;
-
             OnApplicationDestroy.RemoveAll();
             OnApplicationDestroy = null;
 
@@ -118,11 +198,21 @@ namespace AquelaFrameWork.Core
 
         }
 
+        /// <summary>
+        /// <para> 
+        ///     Initialize the AFEngine
+        /// </para>
+        /// </summary>
         virtual public void Initialize()
         {
             SetRunning( true );
         }
 
+        /// <summary>
+        /// <para> 
+        ///     This method Pause the entire application
+        /// </para>
+        /// </summary>
         virtual public void Pause()
         {
             if(m_running)
@@ -133,6 +223,11 @@ namespace AquelaFrameWork.Core
             }
         }
 
+        /// <summary>
+        /// <para> 
+        ///     This method UnPause the entire application
+        /// </para>
+        /// </summary>
         virtual public void UnPause()
         {
             if (!m_running)
@@ -143,7 +238,11 @@ namespace AquelaFrameWork.Core
             }
         }
 
-
+        /// <summary>
+        /// <para> 
+        ///     Return if the application is running
+        /// </para>
+        /// </summary>
         public bool GetRunning()
         {
             return m_running;
@@ -187,6 +286,7 @@ namespace AquelaFrameWork.Core
 
         }
 
+
         // LateUpdate is called every frame, if the Behaviour is enabled (Since v1.0)
         void LateUpdate()
         {
@@ -203,40 +303,25 @@ namespace AquelaFrameWork.Core
 
         }
 
-        // Sent to all game objects when the player gets or looses focus (Since v3.0)
         void OnApplicationFocus(bool focus)
         {
             OnApplicationFocusChange.Dispatch(focus);
         }
 
-        // Sent to all game objects before the application is quit (Since v1.0)
         void OnApplicationQuit()
         {
             OnApplicationExit.Dispatch(true);
         }
 
-//         void OnApplicationPause(bool pauseStatus)
-//         {
-//             SetRunning(pauseStatus);
-//             OnPause.Dispatch(pauseStatus);
-//         }
+         void OnApplicationPause(bool pauseStatus)
+         {
+             SetRunning(pauseStatus);
+             OnPause.Dispatch(pauseStatus);
+         }
 
-        // This function is called when the MonoBehaviour will be destroyed (Since v3.2)
         void OnDestroy()
         {
             OnApplicationDestroy.Dispatch();
-        }
-
-        // This function is called when the behaviour becomes disabled or inactive (Since v1.0)
-        void OnDisable()
-        {
-            OnApplicationEnable.Dispatch(false);
-        }
-
-        // This function is called when the object becomes enabled and active (Since v1.0)
-        void OnEnable()
-        {
-            OnApplicationEnable.Dispatch(false);
         }
     }
 }

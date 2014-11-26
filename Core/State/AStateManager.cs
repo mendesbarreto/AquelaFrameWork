@@ -42,7 +42,7 @@ namespace AquelaFrameWork.Core.State
         {
             if( m_nextState != null )
                 ChangeState();
-            UnityEngine.Debug.Log(m_currentState);
+            //UnityEngine.Debug.Log(m_currentState);
             if (m_currentState != null && !currentStateID.Equals(AState.EGameState.NULL) )
                 m_currentState.AFUpdate(deltaTime);
         }
