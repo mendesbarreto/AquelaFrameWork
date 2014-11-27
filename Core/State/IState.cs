@@ -9,6 +9,11 @@ namespace AquelaFrameWork.Core.State
 {
     public interface IState
     {
+        /// <summary>
+        /// 
+        /// Initialize the State
+        /// 
+        /// </summary>
         void Initialize();
 
         void BuildState();

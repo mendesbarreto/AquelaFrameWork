@@ -7,9 +7,21 @@ using UnityEngine;
 
 namespace AquelaFrameWork.Core
 {
+    /// <summary>
+    /// 
+    /// All objects in the AquelaFramework are AFObject . 
+    /// Is recommended you extend this class for your objects.
+    /// 
+    /// </summary>
     public class AFObject : MonoBehaviour
     {
-        
+
+
+        /// <summary>
+        /// 
+        /// Creates a AFObject by the type passed between "<>", it is the safe object creation at AquelaFrameWork. If you could, avoid "new" operator
+        /// 
+        /// </summary>
         public static T Create<T>( string name = "") where T : MonoBehaviour
         {
             if( name.Equals("") )
@@ -22,7 +34,8 @@ namespace AquelaFrameWork.Core
 
         public void AFDestroy()
         {
-
+            if (this.gameObject)
+                Destroy(this.gameObject);
         }
     }
 }

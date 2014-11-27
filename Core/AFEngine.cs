@@ -145,8 +145,8 @@ namespace AquelaFrameWork.Core
 
         protected void Awake()
         {
-            m_instance = this;
             SetRunning(false);
+            m_instance = this;
             Initialize();
         }
 
@@ -280,7 +280,7 @@ namespace AquelaFrameWork.Core
         }
 
 
-        // This function is called every fixed framerate frame, if the MonoBehaviour is enabled (Since v1.0)
+        // This function is called every fixed frame rate frame, if the MonoBehaviour is enabled (Since v1.0)
         void FixedUpdate()
         {
 
@@ -315,9 +315,11 @@ namespace AquelaFrameWork.Core
 
          void OnApplicationPause(bool pauseStatus)
          {
-             SetRunning(pauseStatus);
-             OnPause.Dispatch(pauseStatus);
+             //SetRunning(pauseStatus);
+            //OnPause.Dispatch(pauseStatus);
          }
+
+
 
         void OnDestroy()
         {
