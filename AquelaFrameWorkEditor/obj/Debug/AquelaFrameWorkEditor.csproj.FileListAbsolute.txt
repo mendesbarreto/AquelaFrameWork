@@ -1,0 +1,5 @@
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Debug\AquelaFrameWorkEditor.dll
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Debug\AquelaFrameWorkEditor.pdb
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Debug\AquelaFrameWorkEditor.csprojResolveAssemblyReference.cache
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Debug\AquelaFrameWorkEditor.dll
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Debug\AquelaFrameWorkEditor.pdb

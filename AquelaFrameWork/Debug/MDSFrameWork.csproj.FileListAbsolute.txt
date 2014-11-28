@@ -1,0 +1,2 @@
+C:\Users\dbarreto\Documents\SmartFoxServer\Assets\Plugins\MDSFrameWork.dll
+C:\Users\dbarreto\Documents\SmartFoxServer\Assets\Plugins\MDSFrameWork.pdb
