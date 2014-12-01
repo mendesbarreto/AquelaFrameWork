@@ -52,6 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\AFBoxColider2DResizer.cs" />
+    <Compile Include="Core\AquelaFrameWork.cs" />
     <Compile Include="Core\ASingleton.cs" />
     <Compile Include="Core\asset\AFPool.cs" />
     <Compile Include="Core\asset\AFTextureAtlas.cs" />
@@ -67,6 +69,8 @@
     <Compile Include="Core\State\AState.cs" />
     <Compile Include="Core\State\AStateManager.cs" />
     <Compile Include="Core\State\IState.cs" />
+    <Compile Include="Core\Window\AFFoulderStructWindow.cs" />
+    <Compile Include="Core\Window\AFSmartFoxServerWindow.cs" />
     <Compile Include="Input\AFInput.cs" />
     <Compile Include="Input\AFInputAction.cs" />
     <Compile Include="Input\AFInputController.cs" />
@@ -87,9 +91,6 @@
     <Compile Include="View\AFSpriteHandler.cs" />
     <Compile Include="View\AFStatesController.cs" />
     <Compile Include="View\IAnimatable.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
