@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MarioSurvivalUnity2D.CSharp", "UnityVS.MarioSurvivalUnity2D.CSharp.csproj", "{AEAB010F-8F07-96DE-0C7E-2916C4C7A891}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.MarioSurvivalUnity2D.CSharp.Editor", "UnityVS.MarioSurvivalUnity2D.CSharp.Editor.csproj", "{9EE4C3A3-3FEE-0823-EE8A-DE9C225B7715}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEAB010F-8F07-96DE-0C7E-2916C4C7A891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAB010F-8F07-96DE-0C7E-2916C4C7A891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAB010F-8F07-96DE-0C7E-2916C4C7A891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAB010F-8F07-96DE-0C7E-2916C4C7A891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EE4C3A3-3FEE-0823-EE8A-DE9C225B7715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EE4C3A3-3FEE-0823-EE8A-DE9C225B7715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EE4C3A3-3FEE-0823-EE8A-DE9C225B7715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EE4C3A3-3FEE-0823-EE8A-DE9C225B7715}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

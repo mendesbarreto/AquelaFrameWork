@@ -1,0 +1,36 @@
+#
+# Sprite sheet data for Aquela FrameWork.
+#
+#
+# Sprite sheet: hero_sprites.png (128 x 128)
+# $TexturePacker:SmartUpdate:01b126fb0c3c7bc33acfb7723f180b18:4c9763faa050fdd9a34bee6189827e8c:774ef369a50db4b61ecc0161c47923e3$
+#
+
+small_fall_0;109;106;16;20;0.5;0.5
+small_hold_stop_0;58;77;15;20;0.5;0.5
+small_hold_walk_0;58;77;15;20;0.5;0.5
+small_hold_walk_1;58;56;15;19;0.5;0.5
+small_jump_0;91;104;16;22;0.5;0.5
+small_kick_0;109;84;16;20;0.5;0.5
+small_run_0;91;61;15;20;0.5;0.5
+small_run_1;91;83;16;19;0.5;0.5
+small_stop_0;75;77;14;20;0.5;0.5
+small_swim_0;109;64;16;18;0.5;0.5
+small_swim_1;40;48;15;19;0.5;0.5
+small_swim_2;108;42;15;20;0.5;0.5
+small_walk_0;75;77;14;20;0.5;0.5
+small_walk_1;75;40;15;19;0.5;0.5
+tall_fall_0;2;64;16;29;0.5;0.5
+tall_hold_stop_0;20;98;16;28;0.5;0.5
+tall_hold_walk_0;20;98;16;28;0.5;0.5
+tall_hold_walk_1;20;68;16;28;0.5;0.5
+tall_hold_walk_2;55;99;16;27;0.5;0.5
+tall_jump_0;2;95;16;31;0.5;0.5
+tall_kick_0;22;38;16;28;0.5;0.5
+tall_run_0;2;34;18;28;0.5;0.5
+tall_run_1;2;4;18;28;0.5;0.5
+tall_run_2;38;69;18;27;0.5;0.5
+tall_stop_0;38;98;15;28;0.5;0.5
+tall_walk_0;38;98;15;28;0.5;0.5
+tall_walk_1;22;8;16;28;0.5;0.5
+tall_walk_3;73;99;16;27;0.5;0.5

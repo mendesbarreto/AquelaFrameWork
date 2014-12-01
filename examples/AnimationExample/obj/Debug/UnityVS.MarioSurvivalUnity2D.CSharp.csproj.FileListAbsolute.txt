@@ -1,0 +1,14 @@
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\AFFrameWork.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\SignalsCSharp.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\SmartFox2X.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\GitHub\MarioSurvivalUnity2D\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\GitHub\MarioSurvivalUnity2D\obj\Debug\UnityVS.MarioSurvivalUnity2D.CSharp.csprojResolveAssemblyReference.cache
+C:\GitHub\MarioSurvivalUnity2D\obj\Debug\Assembly-CSharp.dll
+C:\GitHub\MarioSurvivalUnity2D\obj\Debug\Assembly-CSharp.pdb

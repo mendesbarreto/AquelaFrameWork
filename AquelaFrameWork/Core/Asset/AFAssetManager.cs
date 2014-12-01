@@ -56,7 +56,7 @@ namespace AquelaFrameWork.Core.Asset
 
                     if (typeof(T) == typeof(AFTextureAtlas))
                     {
-                        res = new AFTextureAtlas("sprites", path, AFTextureAtlas.EFileType.kTextTypes_Csv) as T;
+                        res = new AFTextureAtlas(name, path, AFTextureAtlas.EFileType.kTextTypes_Csv) as T;
                     }
                     else
                     {
