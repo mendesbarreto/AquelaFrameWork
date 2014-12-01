@@ -207,6 +207,8 @@ namespace AquelaFrameWork.View
             }
         }
 
+
+
         private void UpdateStartTimes()
         {
             int numFrames = GetTotalFrames();
