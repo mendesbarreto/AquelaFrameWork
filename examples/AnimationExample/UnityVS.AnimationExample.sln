@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.AnimationExample.CSharp", "UnityVS.AnimationExample.CSharp.csproj", "{4F3601AC-D485-BF46-1247-44B03207B65D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.AnimationExample.CSharp.Editor", "UnityVS.AnimationExample.CSharp.Editor.csproj", "{21D9E68B-D981-1343-1B6C-DB54A84E1237}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F3601AC-D485-BF46-1247-44B03207B65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F3601AC-D485-BF46-1247-44B03207B65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F3601AC-D485-BF46-1247-44B03207B65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F3601AC-D485-BF46-1247-44B03207B65D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D9E68B-D981-1343-1B6C-DB54A84E1237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D9E68B-D981-1343-1B6C-DB54A84E1237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D9E68B-D981-1343-1B6C-DB54A84E1237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D9E68B-D981-1343-1B6C-DB54A84E1237}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
