@@ -20,3 +20,7 @@ C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Release\SignalsCSharp.pdb
 C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Release\AquelaFrameWorkEditor.csprojResolveAssemblyReference.cache
 C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Release\AquelaFrameWorkEditor.dll
 C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\obj\Release\AquelaFrameWorkEditor.pdb
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Release\AFFrameWork.dll
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Release\SmartFox2X.dll
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Release\UnityEngine.UI.dll
+C:\GitHub\AquelaFrameWork\AquelaFrameWorkEditor\bin\Release\AFFrameWork.pdb

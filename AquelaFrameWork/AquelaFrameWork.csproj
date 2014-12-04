@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\AFBoxColider2DResizer.cs" />
-    <Compile Include="Core\AquelaFrameWork.cs" />
     <Compile Include="Core\ASingleton.cs" />
     <Compile Include="Core\asset\AFPool.cs" />
     <Compile Include="Core\asset\AFTextureAtlas.cs" />

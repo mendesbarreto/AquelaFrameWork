@@ -10,7 +10,7 @@ using AquelaFrameWork.Core.Window;
 
 namespace AquelaFrameWork.Core
 {
-    public class AquelaFrameWork : Editor
+    public class AquelaFrameWorkEditor : Editor
     {
         
         [MenuItem("AquelaFrameWork/SmartFoxServer")]
