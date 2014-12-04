@@ -53,6 +53,12 @@
     <Compile Include="AFFoulderStructWindow.cs" />
     <Compile Include="AFSmartFoxServerWindow.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AquelaFrameWork\AquelaFrameWork.csproj">
+      <Project>{543c06f2-74c7-4018-b68f-f7dee588c291}</Project>
+      <Name>AquelaFrameWork</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

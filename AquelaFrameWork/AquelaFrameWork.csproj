@@ -47,8 +47,14 @@
     <Reference Include="UnityEditor">
       <HintPath>..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>..\..\..\Program Files (x86)\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.0\Editor\UnityEditor.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Program Files (x86)\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\4.6.0\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,8 +75,11 @@
     <Compile Include="Core\State\AState.cs" />
     <Compile Include="Core\State\AStateManager.cs" />
     <Compile Include="Core\State\IState.cs" />
-    <Compile Include="Core\Window\AFFoulderStructWindow.cs" />
-    <Compile Include="Core\Window\AFSmartFoxServerWindow.cs" />
+    <Compile Include="Debug\AFDebug.cs" />
+    <Compile Include="Debug\AFDebugCanvas.cs" />
+    <Compile Include="Debug\AFDebugSettings.cs" />
+    <Compile Include="Debug\AFDebugViewPositionHandler.cs" />
+    <Compile Include="Debug\AFLogFileWriter.cs" />
     <Compile Include="Input\AFInput.cs" />
     <Compile Include="Input\AFInputAction.cs" />
     <Compile Include="Input\AFInputController.cs" />

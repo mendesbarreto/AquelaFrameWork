@@ -68,6 +68,7 @@ namespace AquelaFrameWork.View
                 }
 
                 m_defaultStateID = name;
+                m_lastStateID = name;
                 state.Play();
             }
 
