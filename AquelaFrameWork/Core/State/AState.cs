@@ -54,19 +54,19 @@ namespace AquelaFrameWork.Core.State
         public Signal<AFObject> OnObjectRemoved = new Signal<AFObject>();
 
         [SerializeField]
-        protected bool m_destroyable;
+        protected bool m_destroyable = true;
         [SerializeField]
-        protected bool m_update;
+        protected bool m_update = true;
         [SerializeField]
-        protected bool m_hasEvents;
+        protected bool m_hasEvents = true;
         [SerializeField]
-        protected bool m_initialized;
+        protected bool m_initialized = false;
 
         virtual protected void Awake()
         {
         }
 
-        virtual public void Initialize(uint flags)
+        virtual public void Setup(uint flags)
         {
             if ((flags & STATE_UPDATE) == STATE_UPDATE)
             {
@@ -94,8 +94,6 @@ namespace AquelaFrameWork.Core.State
             {
                 m_destroyable = true;
             }
-
-            Initialize();
         }
 
 

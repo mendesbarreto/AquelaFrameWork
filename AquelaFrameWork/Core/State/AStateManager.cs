@@ -70,9 +70,9 @@ namespace AquelaFrameWork.Core.State
             if (m_currentState is AState)
                 (m_currentState as AState).transform.parent = gameObject.transform;
 
-            m_nextState = null;
-
             m_currentState.Initialize();
+
+            m_nextState = null;
         }
 
         virtual public void GotoState( AState.EGameState newStateID )
