@@ -64,7 +64,6 @@ namespace AquelaFrameWork.Core.State
 
         virtual protected void Awake()
         {
-            Initialize();
         }
 
         virtual public void Initialize(uint flags)
