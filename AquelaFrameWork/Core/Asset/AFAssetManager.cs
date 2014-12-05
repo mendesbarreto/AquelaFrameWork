@@ -278,15 +278,19 @@ namespace AquelaFrameWork.Core.Asset
             {
                 obj = m_textures[name] as T;
             }
-            if(m_sounds.ContainsKey(name) )
+            else if(m_sounds.ContainsKey(name) )
             {
                 obj = m_sounds[name] as T;
             }
-            if(m_prefabs.ContainsKey(name))
+            else if(m_prefabs.ContainsKey(name))
             {
                 obj = m_prefabs[name] as T;
             }
-            if (m_custom.ContainsKey(name))
+            else if (m_texturesAtlas.ContainsKey(name))
+            {
+                obj = m_texturesAtlas[name] as T;
+            }
+            else if (m_custom.ContainsKey(name))
             {
                 obj = m_custom[name] as T;
             }
