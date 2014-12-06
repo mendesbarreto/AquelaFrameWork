@@ -251,6 +251,10 @@ namespace AquelaFrameWork.Core.Asset
             {
                 m_custom.Remove(name);
             }
+            else if (m_texturesAtlas.ContainsKey(name))
+            {
+                m_texturesAtlas.Remove(name);
+            }
             else
             {
                 UnityEngine.Debug.LogWarning("The asset: " + name + " was not found");
