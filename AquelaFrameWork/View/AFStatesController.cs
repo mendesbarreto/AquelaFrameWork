@@ -29,7 +29,7 @@ namespace AquelaFrameWork.View
 
         protected AFMovieClip m_currentState;
         [SerializeField]
-        protected Dictionary<int, AFMovieClip> m_states;
+        protected Dictionary<int, AFMovieClip> m_states = new Dictionary<int, AFMovieClip>();
         [SerializeField]
         protected bool m_update = true;
 
@@ -38,11 +38,6 @@ namespace AquelaFrameWork.View
         {
             if (m_states.ContainsKey(stateID)) UnityEngine.Debug.LogWarning("The state was not here");
             return m_states[stateID]; 
-        }
-
-        private AFStatesController()
-        {
-            m_states = new Dictionary<int, AFMovieClip>();
         }
 
         public void Add( string name , AFMovieClip state , bool defaultState = false)
@@ -117,7 +112,12 @@ namespace AquelaFrameWork.View
                 m_nextStateID = 0;
             }
             
-            m_currentState.AdvanceTime(time);
+            m_currentState.AFUpdate(time);
+        }
+
+        public override void AFUpdate(double time)
+        {
+            AdvanceTime(time);
         }
 
         public void Remove( string name )

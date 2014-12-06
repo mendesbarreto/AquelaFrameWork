@@ -136,10 +136,13 @@ namespace AquelaFrameWork.Core.State
             m_destroyable = value;
         }
 
-
-        virtual public void AFUpdate(double deltaTime)
+        public override void AFUpdate(double deltaTime)
         {
+            if (m_objects.Count > 0)
+                for (int i = 0; i < m_objects.Count; ++i)
+                    m_objects[i].AFUpdate(deltaTime);
 
+            base.AFUpdate(deltaTime);
         }
 
         virtual public string GetName()
@@ -221,6 +224,19 @@ namespace AquelaFrameWork.Core.State
                 OnObjectAdded.Dispatch(L_object);
 
             return L_object;
+        }
+
+        virtual public void Add(GameObject go)
+        {
+            AFObject[] L_objList = go.GetComponents<AFObject>();
+
+            if( L_objList != null )
+            {
+                for( int i = 0; i < L_objList.Length; ++i )
+                {
+                    Add(L_objList[i]);
+                }
+            }
         }
 
         virtual public Entity AddEntity(Entity entity, object view = null)

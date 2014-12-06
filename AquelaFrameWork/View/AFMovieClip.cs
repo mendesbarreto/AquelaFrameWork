@@ -37,12 +37,6 @@ namespace AquelaFrameWork.View
 
         protected SpriteRenderer m_spriteRender; 
 
-
-        private AFMovieClip()
-        {
-                        
-        }
-
         public void Init(UnityEngine.Sprite[] sprites, float fps = 12)
         {
             m_spriteRender = this.gameObject.AddComponent<SpriteRenderer>();
@@ -74,6 +68,11 @@ namespace AquelaFrameWork.View
             }
 
             m_spriteRender.sprite = m_sprites[0];
+        }
+
+        public void AdvanceTime(double time)
+        {
+
         }
 
         public void AddFrame(Sprite sprite, AFSound sound = null, double duration = -1.0f)
@@ -134,8 +133,9 @@ namespace AquelaFrameWork.View
             m_playing = false;
         }
 
-        public void AdvanceTime(double time)
+        public override void AFUpdate(double time)
         {
+
             if (!m_playing || !this.gameObject.activeSelf || time <= 0.0f) return;
 
 
@@ -148,14 +148,14 @@ namespace AquelaFrameWork.View
             double totalTime = GetTotalTime();
 
 
-            if(m_loop && m_currentTime >= totalTime )
+            if (m_loop && m_currentTime >= totalTime)
             {
                 m_currentTime = 0.0f;
                 m_currentFrame = 0;
             }
 
 
-            if( m_currentTime < totalTime )
+            if (m_currentTime < totalTime)
             {
                 m_currentTime += time;
                 finalFrame = m_sprites.Count - 1;
@@ -186,25 +186,27 @@ namespace AquelaFrameWork.View
 
                     AFSound sound = m_sounds[m_currentFrame];
                     if (sound) sound.Play();
-                    
+
                     if (breakAfterFrame) break;
                 }
 
                 if (m_currentFrame == finalFrame && m_currentTime == totalTime)
-                   dispatchCompleteEvent = true;
+                    dispatchCompleteEvent = true;
             }
 
 
             if (m_currentFrame != previousFrame)
                 m_spriteRender.sprite = m_sprites[m_currentFrame];
 
-            if(dispatchCompleteEvent)
+            if (dispatchCompleteEvent)
                 OnComplete.Dispatch(true);
 
-            if(m_loop && restTime > 0.0f )
+            if (m_loop && restTime > 0.0f)
             {
                 AdvanceTime(restTime);
             }
+
+            base.AFUpdate(time);
         }
 
 

@@ -23,9 +23,12 @@ namespace AquelaFrameWork.Components
             m_collider = gameObject.GetComponent<BoxCollider2D>();
             m_spriteRender = gameObject.GetComponent<SpriteRenderer>();
 
-            Vector2 L_colliderSize = m_spriteRender.sprite.bounds.size;
-            m_collider.size = L_colliderSize;
-            m_collider.center = new Vector2(0, 0);
+            if (m_collider && m_spriteRender && m_spriteRender.sprite)
+            { 
+                Vector2 L_colliderSize = m_spriteRender.sprite.bounds.size;
+                m_collider.size = L_colliderSize;
+                m_collider.center = new Vector2(0, 0);
+            }
         }
     }
 }

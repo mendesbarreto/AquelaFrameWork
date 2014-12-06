@@ -32,7 +32,12 @@ namespace AquelaFrameWork.Core
         }
 
 
-        public void AFDestroy()
+        virtual public void AFUpdate( double time )
+        {
+
+        }
+
+        virtual public void AFDestroy()
         {
             if (this.gameObject)
                 Destroy(this.gameObject);

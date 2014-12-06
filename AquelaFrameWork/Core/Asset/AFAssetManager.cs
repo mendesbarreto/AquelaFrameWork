@@ -56,16 +56,15 @@ namespace AquelaFrameWork.Core.Asset
 
                     if (typeof(T) == typeof(AFTextureAtlas))
                     {
-                        res = new AFTextureAtlas(name, path, AFTextureAtlas.EFileType.kTextTypes_Csv) as T;
+                        res = Add(name, new AFTextureAtlas(name, path, AFTextureAtlas.EFileType.kTextTypes_Csv)) as T;
                     }
                     else
                     {
                         res = Resources.Load<T>(path);
+                        Add(name, res);
                     }
 
                     UnityEngine.Debug.Log("I'll store an object of: " + typeof(T).ToString());
-
-                    Add(name, res);
                 }
             }
             catch( NullReferenceException nullEx )
@@ -125,6 +124,20 @@ namespace AquelaFrameWork.Core.Asset
             return pool;
         }
 
+        public AFTextureAtlas Add(string name, AFTextureAtlas obj)
+        {
+            if (obj != null)
+            {
+                m_texturesAtlas.Add(name, obj);
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("TextureAtlas could not be null");
+            }
+
+            return obj;
+        }
+
         public object Add(string name, object obj)
         {
             if( obj != null )
@@ -165,20 +178,6 @@ namespace AquelaFrameWork.Core.Asset
             }
 
             return gameObject;
-        }
-
-        public AFTextureAtlas Add(string name, AFTextureAtlas textureAtlas)
-        {
-            if (textureAtlas != null)
-            {
-                m_texturesAtlas.Add(name, textureAtlas);
-            }
-            else
-            {
-                UnityEngine.Debug.LogWarning("AFTextureAtlas could not be null");
-            }
-
-            return textureAtlas;
         }
 
         public Texture Add(string name, Texture texture)

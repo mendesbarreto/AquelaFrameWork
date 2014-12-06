@@ -124,12 +124,14 @@ namespace AquelaFrameWork.Core.Asset
                 UnityEngine.Debug.LogWarning("THE SPRITE WAS NOT FOUND: " + name);
                 return null;
             }
-
-           return Sprite.Create(
+           
+            Sprite L_sprite = Sprite.Create(
                 m_texture ,
                 txInfo.GetFrame(),
                 txInfo.GetPivot(),
                 100.0f);
+
+            return L_sprite;
         }
 
         private void ParseCVSFile(String path)
@@ -161,7 +163,8 @@ namespace AquelaFrameWork.Core.Asset
             {
                 info = new AFTextureInfo();
 
-                name = row[0].Replace("/", "-");
+                name = row[0].Replace("/", "_");
+
                 x = float.Parse(row[1]);
                 y = float.Parse(row[2]);
                 w = float.Parse(row[3]);
@@ -172,6 +175,7 @@ namespace AquelaFrameWork.Core.Asset
                 rect = new UnityEngine.Rect(x, y, w, h);
                 pivot = new UnityEngine.Vector2(px, py);
 
+                //TODO: Verificar bounds no sprites
 //                 UnityEngine.Debug.Log("---------------------");
 //                 UnityEngine.Debug.Log("Name: " + name);
 //                 UnityEngine.Debug.Log("Rect: " + rect);

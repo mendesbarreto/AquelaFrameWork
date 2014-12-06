@@ -66,13 +66,13 @@ namespace AquelaFrameWork.Core.State
 
             currentStateID = m_nextState.GetStateID();
             m_currentState = m_nextState;
+            
+            m_nextState = null;
 
             if (m_currentState is AState)
                 (m_currentState as AState).transform.parent = gameObject.transform;
 
             m_currentState.Initialize();
-
-            m_nextState = null;
         }
 
         virtual public void GotoState( AState.EGameState newStateID )
