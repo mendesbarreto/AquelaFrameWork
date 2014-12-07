@@ -70,10 +70,13 @@
     <Compile Include="Core\Factory\IStateFactory.cs" />
     <Compile Include="Core\Factory\StateFactory.cs" />
     <Compile Include="Core\IDisposeble.cs" />
+    <Compile Include="Core\State\AFDefaultStateTransition.cs" />
+    <Compile Include="Core\State\AFSingleTransition.cs" />
     <Compile Include="Core\State\AFStateManager.cs" />
     <Compile Include="Core\State\AState.cs" />
     <Compile Include="Core\State\AStateManager.cs" />
     <Compile Include="Core\State\IState.cs" />
+    <Compile Include="Core\State\IStateTransition.cs" />
     <Compile Include="Debug\AFDebug.cs" />
     <Compile Include="Debug\AFDebugCanvas.cs" />
     <Compile Include="Debug\AFDebugSettings.cs" />

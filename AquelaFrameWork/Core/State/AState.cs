@@ -36,7 +36,7 @@ namespace AquelaFrameWork.Core.State
         [SerializeField]
         protected EGameState m_stateID = EGameState.NULL;
 
-        protected object m_stateManger;
+        protected AStateManager m_stateManger;
         protected AFSoundManager m_soundManager;
         protected AFAssetManager m_assetManager;
         protected AFInput m_input;
@@ -105,6 +105,7 @@ namespace AquelaFrameWork.Core.State
             if (!m_initialized)
             { 
                 m_engine = AFEngine.Instance;
+                m_stateManger = AFEngine.Instance.GetStateManger();
                 m_soundManager = AFSoundManager.Instance;
                 m_assetManager = AFAssetManager.Instance;
                 m_input = AFInput.Instance;

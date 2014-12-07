@@ -23,6 +23,7 @@ namespace AquelaFrameWork.Server
 
         public OnSmartfoxResponse onConnection;
         public OnSmartfoxResponse onLogin;
+        public OnSmartfoxResponse onLoginError;
         public OnSmartfoxResponse onLogout;
 
         public Signal<bool> onPause = new Signal<bool>();
@@ -72,6 +73,8 @@ namespace AquelaFrameWork.Server
         public void OnLoginError( BaseEvent evt )
         {
             UnityEngine.Debug.LogError("Login failure: " + (string)evt.Params["errorMessage"]);
+            if (onLoginError != null)
+                onLoginError(evt);
         }
 
 
@@ -97,7 +100,6 @@ namespace AquelaFrameWork.Server
             config.Host = host;
             config.Port = port;
             config.Zone = zone;
-
 
             if (onSFSConnection != null)
                 onConnection += onSFSConnection;
@@ -144,8 +146,10 @@ namespace AquelaFrameWork.Server
 		    }
 
             UnityEngine.Debug.Log("Connection status: " + statusMessage);
-            onConnection(evt);
 
+
+            if (onConnection != null)
+                onConnection(evt);
         }
 
         public void Login( string userName , string password, string zone = "sitio" )

@@ -26,6 +26,9 @@ namespace AquelaFrameWork.Core.State
         protected IState m_nextState;
 
         protected IStateFactory m_factory;
+
+        protected IStateTransition m_transition;
+
         virtual protected void Awake()
         {
             gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
@@ -36,6 +39,17 @@ namespace AquelaFrameWork.Core.State
             //TODO: Verify if factory is null case yes throw some error
             m_factory = factory;
             m_engine = AFEngine.Instance;
+
+            AddTransition(new AFDefaultStateTransition());
+        }
+
+        virtual public void AddTransition( IStateTransition transition )
+        {
+            if (typeof(AFObject) == transition.GetType())
+                ((AFObject)transition).gameObject.transform.parent = gameObject.transform;
+
+            m_transition = transition;
+            m_transition.Initialize(this);
         }
 
         virtual public void AFUpdate(double deltaTime)
@@ -73,10 +87,13 @@ namespace AquelaFrameWork.Core.State
                 (m_currentState as AState).transform.parent = gameObject.transform;
 
             m_currentState.Initialize();
+
+            m_transition.End();
         }
 
         virtual public void GotoState( AState.EGameState newStateID )
         {
+            m_transition.Begin();
             GotoState( m_factory.CreateStateByID(newStateID) );
         }
 

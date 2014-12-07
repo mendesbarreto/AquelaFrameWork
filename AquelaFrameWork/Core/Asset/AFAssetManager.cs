@@ -301,6 +301,21 @@ namespace AquelaFrameWork.Core.Asset
             return obj;
         }
 
+        public Sprite CreateSpriteFromTexture( string path )
+        {
+            Texture2D L_texture = Load<Texture2D>(path);
+
+            if (L_texture != null)
+            {
+                return Sprite.Create(
+                        L_texture,
+                        new Rect(0, 0, L_texture.width, L_texture.height),
+                        new Vector2(0.5f,0.5f) );
+            }
+
+
+            return null;
+        }
 
         public void DisposeAll()
         {
