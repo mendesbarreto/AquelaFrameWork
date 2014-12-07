@@ -212,9 +212,9 @@ namespace AquelaFrameWork.Core.State
 
             if( L_object == null)
             {
-                m_objects.Add(obj);
                 L_object = obj;
-                obj.transform.parent = gameObject.transform;
+                m_objects.Add(L_object);
+                L_object.gameObject.transform.parent = this.gameObject.transform;
             }
             else
             {
