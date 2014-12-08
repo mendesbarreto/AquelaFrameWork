@@ -16,5 +16,5 @@ Improvement
 ---
 * [AF-40] - Criar transição de tela entre os games states
 * [AF-41] - Criar controlador de Index para os gameObjects na cena
-asdfasdf
+asdfasdffff
 TestandoTestando
