@@ -53,7 +53,6 @@ namespace AquelaFrameWork.Core
     ///     </item> 
     /// 
     /// </list> 
-    /// 
     /// </para>
     /// 
     /// </summary>

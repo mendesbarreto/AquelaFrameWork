@@ -32,9 +32,8 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SignalsCSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SignalsFrameWork\bin\Release\SignalsCSharp.dll</HintPath>
+    <Reference Include="SignalsCSharp">
+      <HintPath>..\..\SignalsFrameWork\signals .Net 3.5\bin\Release\SignalsCSharp.dll</HintPath>
     </Reference>
     <Reference Include="SmartFox2X">
       <HintPath>.\SmartFox2X.dll</HintPath>
@@ -100,8 +99,11 @@
     <Compile Include="View\AFMovieClip.cs" />
     <Compile Include="View\AFSprite.cs" />
     <Compile Include="View\AFSpriteHandler.cs" />
+    <Compile Include="View\AFSpriteRenderer.cs" />
     <Compile Include="View\AFStatesController.cs" />
+    <Compile Include="View\AMovieClip.cs" />
     <Compile Include="View\IAnimatable.cs" />
+    <Compile Include="View\ISpriteContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

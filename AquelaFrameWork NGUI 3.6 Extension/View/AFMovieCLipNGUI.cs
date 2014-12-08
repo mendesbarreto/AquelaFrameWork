@@ -9,6 +9,7 @@ namespace AquelaFrameWork.View
     {
         public AFSpriteRendererNGUI UI2DSpriteRenderer { get; set; }
 
+
         public override void Init(UnityEngine.Sprite[] sprites, float fps = 12)
         {
             AFSpriteRendererNGUI spngui = new AFSpriteRendererNGUI();
@@ -19,7 +20,5 @@ namespace AquelaFrameWork.View
 
             base.Init(sprites, fps);
         }
-
-
     }
 }
