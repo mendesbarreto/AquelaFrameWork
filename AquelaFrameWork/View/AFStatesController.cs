@@ -27,25 +27,25 @@ namespace AquelaFrameWork.View
         [SerializeField]
         protected int m_nextStateID = 0;
 
-        protected AFMovieClip m_currentState;
+        protected AMovieClip m_currentState;
         [SerializeField]
-        protected Dictionary<int, AFMovieClip> m_states = new Dictionary<int, AFMovieClip>();
+        protected Dictionary<int, AMovieClip> m_states = new Dictionary<int, AMovieClip>();
         [SerializeField]
         protected bool m_update = true;
 
-        public AFMovieClip GetState(string name) { return GetState(name.GetHashCode()); }
-        public AFMovieClip GetState(int stateID) 
+        public AMovieClip GetState(string name) { return GetState(name.GetHashCode()); }
+        public AMovieClip GetState(int stateID) 
         {
             if (m_states.ContainsKey(stateID)) UnityEngine.Debug.LogWarning("The state was not here");
             return m_states[stateID]; 
         }
 
-        public void Add( string name , AFMovieClip state , bool defaultState = false)
+        public void Add(string name, AMovieClip state, bool defaultState = false)
         {
             Add(name.GetHashCode(), state, defaultState);
         }
 
-        public void Add(int name, AFMovieClip state, bool defaultState = false)
+        public void Add(int name, AMovieClip state, bool defaultState = false)
         {
             if (m_states.ContainsKey(name)) throw new Exception("The State " + name + " already was created");
 
@@ -190,17 +190,17 @@ namespace AquelaFrameWork.View
             return m_defaultStateID;
         }
 
-        public AFMovieClip GetDefaultState()
+        public AMovieClip GetDefaultState()
         {
             return m_states[m_defaultStateID];
         }
 
-        public AFMovieClip GetLastState()
+        public AMovieClip GetLastState()
         {
             return m_states[m_lastStateID];
         }
 
-        public AFMovieClip GetCurrentState()
+        public AMovieClip GetCurrentState()
         {
             return m_states[m_currentStateID];
         }
