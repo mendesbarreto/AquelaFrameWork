@@ -21,18 +21,18 @@ namespace AquelaFrameWork.View
         protected int m_defaultStateID = 0;
         [SerializeField]
         protected int m_currentStateID = 0;
-
         [SerializeField]
         protected int m_lastStateID = 0;
         [SerializeField]
         protected int m_nextStateID = 0;
-
-        protected AMovieClip m_currentState;
         [SerializeField]
         protected Dictionary<int, AMovieClip> m_states = new Dictionary<int, AMovieClip>();
         [SerializeField]
         protected bool m_update = true;
 
+        protected AMovieClip m_currentState;
+
+        public Dictionary<int, AMovieClip> GetStates() { return m_states; }
         public AMovieClip GetState(string name) { return GetState(name.GetHashCode()); }
         public AMovieClip GetState(int stateID) 
         {
