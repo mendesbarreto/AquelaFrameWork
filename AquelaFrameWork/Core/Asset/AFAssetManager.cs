@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -10,6 +12,32 @@ namespace AquelaFrameWork.Core.Asset
 
     public class AFAssetManager : ASingleton<AFAssetManager>
     {
+        public static readonly int DEFAULT_SCREEN_DPI = 160;
+
+#if UNITY_EDITOR
+        public enum EPlataform
+        {
+            IOS = 0,
+            ANDROID,
+            WINDOWSP8,
+            EDITOR
+        }
+
+        public static readonly int DPI_IPHONE_3 = 163;
+        public static readonly int DPI_IPHONE_4_5 = 326;
+        public static readonly int DPI_IPHONE_6 = 401;
+        public static readonly int DPI_IPAD_3 = 264;
+        public static readonly int DPI_IPAD_1_2 = 132;
+        public static readonly int DPI_IPAD_RETINA = 324;
+        public static readonly int DPI_GALAXY_S5 = 432;
+        public static readonly int DPI_GALAXY_S4 = 441;
+        public static readonly int DPI_LUMIA_720 = 217;
+        public static readonly int DPI_LUMIA_520 = 233;
+        
+        public static int SimulatedDPI { get; set; }
+        public static EPlataform SimulatePlatform { get; set; }
+#endif
+
         public static string iphonePath = "IOS/";
         public static string androidPath = "Android/";
         public static string windowsPhone8Path = "WP8/";
@@ -33,10 +61,11 @@ namespace AquelaFrameWork.Core.Asset
         protected Dictionary<string , object> m_custom = new Dictionary<string,object>();
 
         protected Dictionary<string, AFPool> m_pool = new Dictionary<string, AFPool>();
-        void Awake()
-        {
-            gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
-        }
+
+//         public void Awake()
+//         {
+//             gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
+//         }
 
         public T Load<T>(string path) where T : UnityEngine.Object
         {
@@ -51,17 +80,32 @@ namespace AquelaFrameWork.Core.Asset
             {
                 res = GetAsset<T>(name);
 
-                if (res == null)
+                if ( AFObject.IsNull(res) )
                 {
 
-                    if (typeof(T) == typeof(AFTextureAtlas))
+                    if ( typeof(T) == typeof(AFTextureAtlas) )
                     {
                         res = Add(name, new AFTextureAtlas(name, path, AFTextureAtlas.EFileType.kTextTypes_Csv)) as T;
                     }
                     else
                     {
                         res = Resources.Load<T>(path);
-                        Add(name, res);
+
+                        if (typeof(T) == typeof(Texture))
+                            Add(name, res as Texture);
+
+                        else if (typeof(T) == typeof(GameObject))
+                            Add(name, res as GameObject);
+
+                        else if (typeof(T) == typeof(AFSound))
+                            Add(name, res as AFSound);
+
+                        else if (typeof(T) == typeof(Texture))
+                            Add(name, res as Texture);    
+                        else
+                            Add(name, res);
+
+                        Resources.UnloadUnusedAssets();
                     }
 
                     UnityEngine.Debug.Log("I'll store an object of: " + typeof(T).ToString());
@@ -90,7 +134,7 @@ namespace AquelaFrameWork.Core.Asset
 
                 T obj = GetAsset<T>(assetName);
 
-                if ( obj != null )
+                if ( obj )
                 {
 
                     pool = AFObject.Create<AFPool>(name);
@@ -126,21 +170,22 @@ namespace AquelaFrameWork.Core.Asset
 
         public AFTextureAtlas Add(string name, AFTextureAtlas obj)
         {
-            if (obj != null)
-            {
+            if (!AFObject.IsNull(obj))
+             {
                 m_texturesAtlas.Add(name, obj);
-            }
-            else
-            {
-                UnityEngine.Debug.LogWarning("TextureAtlas could not be null");
-            }
+             }
+             else
+             {
+                 UnityEngine.Debug.LogWarning("TextureAtlas could not be null");
+             }
 
             return obj;
         }
 
+
         public object Add(string name, object obj)
         {
-            if( obj != null )
+            if (!AFObject.IsNull(obj))
             {
                 m_custom.Add(name , obj);
             }
@@ -154,7 +199,7 @@ namespace AquelaFrameWork.Core.Asset
 
         public AFSound Add(string name, AFSound sound)
         {
-            if ( sound != null)
+            if (!AFObject.IsNull(sound))
             {
                 m_sounds.Add(name, sound);
             }
@@ -168,7 +213,7 @@ namespace AquelaFrameWork.Core.Asset
 
         public GameObject Add(string name, GameObject gameObject)
         {
-            if ( gameObject != null)
+            if (!AFObject.IsNull(gameObject))
             {
                 m_prefabs.Add(name, gameObject);
             }
@@ -182,7 +227,7 @@ namespace AquelaFrameWork.Core.Asset
 
         public Texture Add(string name, Texture texture)
         {
-            if (texture != null)
+            if (!AFObject.IsNull(texture))
             {
                 m_textures.Add(name, texture);
             }
@@ -333,11 +378,34 @@ namespace AquelaFrameWork.Core.Asset
                 return androidPath;
             #elif UNITY_WP8
                 return windowsPhone8Path;
+            #elif UNITY_EDITOR
+                return GetEditorPath();
             #else
-            return GetCommumPath();
-            #endif
+                return GetCommumPath();
+            #endif  
         }
 
+#if UNITY_EDITOR
+
+        public static string GetEditorPath()
+        {
+            if( SimulatePlatform != null )
+            {
+                switch(SimulatePlatform)
+                {
+                    case EPlataform.IOS:
+                        return iphonePath;
+                    case EPlataform.ANDROID:
+                        return androidPath;
+                    case EPlataform.WINDOWSP8:
+                        return windowsPhone8Path;
+                }
+
+            }
+            return commumPath;
+        }
+
+#endif
         public static string GetPathTargetPlatformWithResolution()
         {
             return ( GetPathTargetPlatform() + GetResolutionFolder() );
@@ -347,20 +415,27 @@ namespace AquelaFrameWork.Core.Asset
         public static string GetResolutionFolder()
         {
             UnityEngine.Debug.Log("DPI DA TELA: " + Screen.dpi);
+            float DPI;
 
-            if (Screen.dpi > 290 )
+#if UNITY_EDITOR
+            DPI = Screen.dpi <= 0 ? SimulatedDPI : Screen.dpi;
+#else
+            DPI = Screen.dpi <= 0 ? DEFAULT_SCREEN_DPI : Screen.dpi;
+#endif //UNITY_EDITOR
+
+            if (DPI > 290)
             {
                 return DIRECTORY_NAME_XHIGH;
             }
-            else if (Screen.dpi > 200 && Screen.dpi <= 290 )
+            else if (DPI > 200 && Screen.dpi <= 290)
             {
                 return DIRECTORY_NAME_HIGH;
             }
-            else if ( Screen.dpi >= 150  && Screen.dpi <= 200 )
+            else if (DPI >= 150 && Screen.dpi <= 200)
             {
                 return DIRECTORY_NAME_MEDIUM;
             }
-            else if( Screen.dpi < 150 )
+            else if (DPI < 150)
             {
                 return DIRECTORY_NAME_LOW;
             }
