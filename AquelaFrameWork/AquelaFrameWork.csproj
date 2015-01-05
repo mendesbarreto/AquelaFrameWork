@@ -84,10 +84,8 @@
     <Compile Include="Input\AFInput.cs" />
     <Compile Include="Input\AFInputAction.cs" />
     <Compile Include="Input\AFInputController.cs" />
-    <Compile Include="Server\Encryption.cs" />
     <Compile Include="Core\AFObject.cs" />
     <Compile Include="Core\AFComponent.cs" />
-    <Compile Include="Server\AFServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sound\AFSoundManager.cs" />
     <Compile Include="Sound\AFSound.cs" />
