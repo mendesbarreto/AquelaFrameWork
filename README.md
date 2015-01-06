@@ -13,7 +13,7 @@ Bug
 * [AF-53] - Problema no reaproveitamento de Assets do AssetManager, nem todos estão sendo pegos corretamente
 * [AF-57] - Unity3D sobrescreve o operador " == ou != ", de forma que não sabemos se eles estão nulos ou não
 * [AF-60] - Problema quando o AState ia destruir os GameObjects.
-* [AF-63] - AFsound estão utilizando o operador "new" para serem criados, tem que utilizar AFSound.Create()
+* [AF-63] - Operação invalida na ora de criar o AFSound, estava sendo utilizado o operador "new", agora é necessario utlizar AFSound.Create()
 
 Improvement
 ---
