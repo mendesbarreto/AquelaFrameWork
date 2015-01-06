@@ -17,7 +17,8 @@ Bug
 
 Improvement
 ---
-* [AF-50] - Suporte a simulação de Resolução e plataform no AFAssetManger
+* [AF-50] - Suporte a simulação de Resolução e plataform no AFAssetManger 
+* [AF-50] - Suporte a indicação de qual pasta é a raiz do projeto, ou seja, fazer subpastas virarem a pasta principal de um determinado projeto.
 * [AF-44] - Suporte NGUI:UISprite2D nas animações da AFMovieclip
 * [AF-46] - Suporte a simulador de DPI
 * [AF-54] - Suporte ao Instantiate() no AFTextureAtlas para criar Sprites mais rápidos.
