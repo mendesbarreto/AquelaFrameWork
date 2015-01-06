@@ -8,7 +8,6 @@ Release Notes - Aquela FrameWork - Version 1.1.4
 Bug
 ---
 * [AF-12] - Problema na Assetmanager: DPI Folder não está sendo selecionada corretamente
-* [AF-47] - Suporte Mult-resolution componente que fará imagens do sprite render buscar sua resolução corretamente
 * [AF-48] - AFDestroy() dos states não estãvão sendo chamados
 * [AF-49] - AFAssetManager.Add( GameObject ) problema para carregar prefabs
 * [AF-53] - Problema no reaproveitamento de Assets do AssetManager, nem todos estão sendo pegos corretamente
@@ -28,3 +27,4 @@ Improvement
 * [AF-61] - Suporte ao Instantiate no AFAssetManager de objetos já carregados.
 * [AF-62] - Integrar Assetmanager com SoundManager
 * [AF-64] - Novas formas de adicionar sons na sound manager
+* [AF-47] - Suporte Responsive-Mult-resolution. O Componente fará o "SpriteRenderer" buscar resolução correta, mediante ao dispositivo usado.
