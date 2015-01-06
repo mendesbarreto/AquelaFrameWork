@@ -25,6 +25,6 @@ Improvement
 * [AF-56] - Função de verificação se objeto da engine é nulo ou não.
 * [AF-58] - Inclusão da Propriedade do tipo Sprite no AFTextureInfo
 * [AF-61] - Suporte ao Instantiate no AFAssetManager de objetos já carregados.
-* [AF-62] - Integrar Assetmanager com SoundManager
+* [AF-62] - AFSoundManager agora com suporte a AFAssetManger, assets compartilhado salvado memoria alocada.
 * [AF-64] - Novas formas de adicionar sons na sound manager
 * [AF-47] - Suporte Responsive-Mult-resolution. O Componente fará o "SpriteRenderer" buscar resolução correta, mediante ao dispositivo usado.
