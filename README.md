@@ -19,7 +19,7 @@ Improvement
 ---
 * [AF-50] - Suporte a simulação de Resolução e plataform no AFAssetManger
 * [AF-44] - Suporte NGUI:UISprite2D nas animações da AFMovieclip
-* [AF-46] - Suporte a simulador de targetplataform e DPI
+* [AF-46] - Suporte a simulador de DPI
 * [AF-54] - Suporte ao Instantiate() no AFTextureAtlas para criar Sprites mais rápidos.
 * [AF-55] - Inserido propriedade name no AFMovieClip
 * [AF-56] - Função de verificação se objeto da engine é nulo ou não.
