@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using AquelaFrameWork.Core;
-using AquelaFrameWork.Core.Asset;
 
 using Signals;
 
@@ -33,56 +32,36 @@ namespace AquelaFrameWork.Sound
         public int audiosInList = 0;
         protected bool m_mute = false;
 
+
         void Awake()
         {
             gameObject.transform.parent = AFEngine.Instance.gameObject.transform;
-            //gameObject.AddComponent<AudioListener>();
         }
 
-        internal AFSound Put( AFSound sound )
+        public AFSound Add( string name )
         {
-            if (Exists(sound.GetName()))
-            {
-                AFDebug.LogWarning("Audio already registered: " + sound.GetName() );
-                return m_audios[sound.GetName()];
-            }
-
-            m_audios[sound.GetName()] = sound;
-            OnAudioAdd.Dispatch(sound);
-            audiosInList++;
-
-            sound.gameObject.transform.SetParent(this.gameObject.transform);
-            
-            return sound;
+            //TODO: GetFrom AssetManager
+            UnityEngine.Debug.LogWarning("ADD SOUND FROM ASSET MANAGER >>>>> NOT IMPLEMENTED" );
+            return null;
         }
 
-        public AFSound Add(AFSound sound)
+        public AFSound Add(string name, AudioClip audioClip, Transform emitter = null, float volume = 1.0f , float pitch = 1.0f , bool loop = false)
         {
-            return Put(sound);
-        }
+            AFSound audio;
 
-        public AFSound Add(string name, AudioClip audioClip, Transform emitter = null, float volume = 1.0f, float pitch = 1.0f, bool loop = false, bool playOncePertime = true)
-        {
-            return Put(AFSound.Create(name, audioClip, emitter, volume, pitch, loop, playOncePertime));
-        }
-
-        public AFSound Add(string name, string path, Transform emitter = null, float volume = 1.0f, float pitch = 1.0f, bool loop = false, bool playOncePertime = true)
-        {
-            return Put(AFSound.Create(path, name, emitter, volume, pitch, loop, playOncePertime));
-        }
-
-        public AFSound Add(string path, Transform emitter = null, float volume = 1.0f, float pitch = 1.0f, bool loop = false, bool playOncePertime = true)
-        {
-            return Add(path, path, emitter, volume, pitch, loop, playOncePertime);
-        }
-
-        public bool Exists( string name )
-        {
-            if (name != null && name.Length > 0)
+            if( name != null && name.Length > 0 )
             {
                 if (m_audios.ContainsKey(name))
                 {
-                    return true;
+                    audio = m_audios[name];
+                    UnityEngine.Debug.LogWarning("The audio was not added, because the name already in list of audios");
+                }
+                else
+                {
+                    audio = new AFSound(name, audioClip, emitter, volume, pitch, loop);
+                    m_audios[name] = audio;
+
+                    OnAudioAdd.Dispatch(audio);
                 }
             }
             else
@@ -90,7 +69,9 @@ namespace AquelaFrameWork.Sound
                 throw new Exception("The name of sound was not valid");
             }
 
-            return false;
+            audiosInList++;
+
+            return audio;
         }
 
         public void Remove(string name)
@@ -166,7 +147,7 @@ namespace AquelaFrameWork.Sound
 
         private AudioSource Pause(AFSound sound)
         {
-            if ( sound.IsNull() )
+            if (!m_audios.ContainsKey(name))
                 throw new Exception("Audio not exists");
 
             OnAudioPause.Dispatch(sound);
@@ -229,7 +210,7 @@ namespace AquelaFrameWork.Sound
 
         public AudioSource Play(AudioClip clip, float volume, float pitch, Transform emitter, bool loop, Vector3 point)
         {
-            GameObject go = new GameObject("Audio:" + clip.name);
+            GameObject go = new GameObject("Audio: " + clip.name);
             go.transform.position = point;
 
             if (emitter != null)

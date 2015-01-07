@@ -44,21 +44,19 @@ namespace AquelaFrameWork.Core.Asset
         public static string commumPath = "Common/";
         public static string package = "com.globo.sitio.games";
 
-        private static string DIRECTORY_OWNER = "QuebraCuca";
-
         public static readonly string DIRECTORY_NAME_ASSETS = "Assets";
-        public static readonly string DIRECTORY_NAME_HIGH = "High/";
-        public static readonly string DIRECTORY_NAME_XHIGH = "ExtraHigh/";
-        public static readonly string DIRECTORY_NAME_LOW = "Low/";
-        public static readonly string DIRECTORY_NAME_MEDIUM = "Medium/";
-        public static readonly string DIRECTORY_NAME_SOUND = "Sounds/";
-        public static readonly string DIRECTORY_NAME_DATA = "Data/";
+        public static readonly string DIRECTORY_NAME_HIGH = "High";
+        public static readonly string DIRECTORY_NAME_XHIGH = "ExtraHigh";
+        public static readonly string DIRECTORY_NAME_LOW = "Low";
+        public static readonly string DIRECTORY_NAME_MEDIUM = "Medium";
+        public static readonly string DIRECTORY_NAME_SOUND = "Sounds";
+        public static readonly string DIRECTORY_NAME_DATA = "Data";
         public static readonly string DIRECTORY_NAME_SCRIPTS = "Scripts";
         public static readonly string DIRECTORY_NAME_RESOURCES= "Resources";
 
         protected Dictionary<string, Texture> m_textures = new Dictionary<string,Texture>();
         protected Dictionary<string, AFTextureAtlas> m_texturesAtlas = new Dictionary<string, AFTextureAtlas>();
-        protected Dictionary<string, AudioClip> m_sounds = new Dictionary<string, AudioClip>();
+        protected Dictionary<string , AFSound> m_sounds = new Dictionary<string,AFSound>();
         protected Dictionary<string , GameObject> m_prefabs = new Dictionary<string,GameObject>();
         protected Dictionary<string , object> m_custom = new Dictionary<string,object>();
 
@@ -95,12 +93,15 @@ namespace AquelaFrameWork.Core.Asset
 
                         if (typeof(T) == typeof(Texture))
                             Add(name, res as Texture);
+
                         else if (typeof(T) == typeof(GameObject))
                             Add(name, res as GameObject);
+
+                        else if (typeof(T) == typeof(AFSound))
+                            Add(name, res as AFSound);
+
                         else if (typeof(T) == typeof(Texture))
-                            Add(name, res as Texture);
-                        else if (typeof(T) == typeof(AudioClip))
-                            Add(name, res as AudioClip);
+                            Add(name, res as Texture);    
                         else
                             Add(name, res);
 
@@ -196,7 +197,7 @@ namespace AquelaFrameWork.Core.Asset
             return obj;
         }
 
-        public AudioClip Add(string name, AudioClip sound)
+        public AFSound Add(string name, AFSound sound)
         {
             if (!AFObject.IsNull(sound))
             {
@@ -262,7 +263,7 @@ namespace AquelaFrameWork.Core.Asset
             return null;
         }
 
-        public AudioClip GetAudioClip(string name)
+        public AFSound GetAFSound( string name )
         {
             if( m_sounds.ContainsKey( name ) )
             {
@@ -282,7 +283,7 @@ namespace AquelaFrameWork.Core.Asset
             }
             else if ( m_sounds.ContainsKey(name))
             {
-                //m_sounds[name].Destroy();
+                m_sounds[name].Destroy();
                 m_sounds.Remove(name);
             }
             else if( m_prefabs.ContainsKey(name ) )
@@ -364,7 +365,7 @@ namespace AquelaFrameWork.Core.Asset
         public void DisposeAll()
         {
             m_textures = new Dictionary<string,Texture>();
-            m_sounds = new Dictionary<string, AudioClip>();
+            m_sounds = new Dictionary<string,AFSound>();
             m_prefabs = new Dictionary<string,GameObject>();
             m_custom = new Dictionary<string,object>();
         }
@@ -405,12 +406,9 @@ namespace AquelaFrameWork.Core.Asset
         }
 
 #endif
-        public static string GetPathTargetPlatformWithResolution(string file = "")
+        public static string GetPathTargetPlatformWithResolution()
         {
-            if (DIRECTORY_OWNER.Equals(""))
-                return (GetPathTargetPlatform() + GetResolutionFolder() + file);
-                
-            return (DIRECTORY_OWNER + "/" + GetPathTargetPlatform() + GetResolutionFolder() + file);
+            return ( GetPathTargetPlatform() + GetResolutionFolder() );
         }
 
 
@@ -427,7 +425,7 @@ namespace AquelaFrameWork.Core.Asset
 
             if (DPI > 290)
             {
-                return DIRECTORY_NAME_HIGH;
+                return DIRECTORY_NAME_XHIGH;
             }
             else if (DPI > 200 && Screen.dpi <= 290)
             {
@@ -448,40 +446,6 @@ namespace AquelaFrameWork.Core.Asset
         public static string GetCommumPath()
         {
             return commumPath;
-        }
-
-
-        public T Instantiate<T>( string nameOrPath ) where T : UnityEngine.Object
-        {
-            T L_object = Load<T>(nameOrPath);
-
-            if(AFObject.IsNull(L_object) )
-            {
-                AFDebug.LogError("Was not Possible to load or instantiate follow gameObject: " + name );
-            }
-            else
-            {
-                T L_objectInstantiated = Instantiate(L_object) as T;
-                
-                if (AFObject.IsNull(L_object))
-                    AFDebug.LogError("Was not Possible to load or instantiate follow gameObject: " + name);
-
-                return L_objectInstantiated;
-            }
-
-            return null;
-        }
-
-        public static string SetDirectoryOwner(string newOwner)
-        {
-            return (DIRECTORY_OWNER = newOwner);
-        }
-        public static string GetDirectoryOwner( string path )
-        {
-            if (DIRECTORY_OWNER.Equals(""))
-                return path;
-
-            return (DIRECTORY_OWNER + "/" + path);
         }
 
     }
